@@ -1,0 +1,6 @@
+.DS_Store
+.idea/
+composer.lock
+vendor/
+running/
+app/config/
