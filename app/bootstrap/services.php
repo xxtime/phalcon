@@ -69,12 +69,12 @@ $di->set('modelsMetadata', function () {
 
 $di->set('modelsCache', function () use ($di) {
     $frontCache = new FrontData(["lifetime" => $di['config']->setting->cacheTime]);
-    if (isset($di['config']->redis)) {
+    if (isset($di['config']->cache)) {
         return new RedisCache($frontCache, [
-            'host'   => $di['config']->redis->host,
-            'port'   => $di['config']->redis->port,
-            'index'  => $di['config']->redis->index,
-            'prefix' => 'cache_',
+            'host'   => $di['config']->cache->host,
+            'port'   => $di['config']->cache->port,
+            'index'  => $di['config']->cache->db,
+            'prefix' => 'cache|',
         ]);
     }
     return new FileCache($frontCache, ['cacheDir' => BASE_DIR . '/running/cache/', 'prefix' => 'cache_']);
@@ -93,9 +93,18 @@ $di['eventsManager']->attach('db', function ($event, $connection) use ($di) {
 });
 
 
+$di->set('cache', function () use ($di) {
+    $redis = new Redis();
+    $redis->connect($di['config']->cache->host, $di['config']->cache->port);
+    $redis->select($di['config']->cache->db);
+    return $redis;
+}, true);
+
+
 $di->set('redis', function () use ($di) {
     $redis = new Redis();
     $redis->connect($di['config']->redis->host, $di['config']->redis->port);
+    $redis->select($di['config']->redis->db);
     return $redis;
 }, true);
 

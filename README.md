@@ -31,5 +31,5 @@
 
 
 ## 关于
-主页: [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon)  
+主页: [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon-module)  
 作者: [https://www.xxtime.com](https://www.xxtime.com)  
