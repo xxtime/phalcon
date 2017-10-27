@@ -28,6 +28,7 @@
 [mobiledetect/mobiledetectlib](https://packagist.org/packages/mobiledetect/mobiledetectlib) 设备识别  
 [alidayu](http://www.alidayu.com/) 短信功能  
 [mongodb](https://packagist.org/packages/mongodb/mongodb) MongoDB抽象层  
+[hashids](https://packagist.org/packages/hashids/hashids) Hashids  
 
 
 ## 关于
