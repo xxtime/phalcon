@@ -25,7 +25,7 @@ $router->add(
     [
         'controller' => 1,
         'action'     => 2,
-        'argv'       => 3
+        'params'     => 3
     ]
 );
 
@@ -44,7 +44,7 @@ $router->add(
         'module'     => 1,
         'controller' => 2,
         'action'     => 3,
-        'argv'       => 4,
+        'params'     => 4,
     ]
 );
 
