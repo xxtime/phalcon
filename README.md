@@ -1,21 +1,20 @@
-## 说明
+## 介绍
 基于高性能的开源框架Phalcon开发, 集成Composer组件, 集成Redis,Mongodb支持  
-[Phalcon相关文档](https://docs.phalconphp.com)
 
 
-## 所需环境
+## 环境
 * PHP >= 5.5
 * composer
-* [redis](https://pecl.php.net/package/redis) - (可选)
-* [mongoDb](https://pecl.php.net/package/mongodb) - (可选)
+* [redis](https://pecl.php.net/package/redis) - 可选
+* [mongoDb](https://pecl.php.net/package/mongodb) - 可选
 
 
-## 使用方法
+## 使用
 * 首次安装调试时,需要将配置目录下.app.yml 修改为app.yml
 * 文档在docs目录下
 
 
-## 类库组件
+## 组件
 
 组件 | 说明 | 文档
 --- | --- | ---
@@ -38,5 +37,6 @@ Awesome PHP | 更多组件  | [docs](https://github.com/ziadoz/awesome-php)
 
 
 ## 关于
-主页: [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon-module)  
+项目: [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon)  
 作者: [https://www.xxtime.com](https://www.xxtime.com)  
+文档: [https://docs.phalconphp.com](https://docs.phalconphp.com)
