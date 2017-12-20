@@ -12,6 +12,7 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Http\Response\Cookies,
     Phalcon\Events\Manager as EventsManager,
     Phalcon\Logger\Adapter\File as FileLogger,
+    Phalcon\Logger\Formatter\Line,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
@@ -37,6 +38,7 @@ $di->set('router', function () {
 
 $di->set('logger', function ($file = null) {
     $logger = new FileLogger(BASE_DIR . '/running/logs/' . ($file ? $file : date('Ymd')));
+    $logger->setFormatter(new Line("[%date%][%type%] %message%", 'Y-m-d H:i:s O'));
     return $logger;
 }, false);
 

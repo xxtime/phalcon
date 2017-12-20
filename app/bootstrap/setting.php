@@ -19,12 +19,8 @@ switch ($di['config']->setting->sandbox) {
 
 
 if ($di['config']->setting->logs) {
-    if (!isset($_REQUEST['_url'])) {
-        $_REQUEST['_url'] = '/';
-    }
-    $_url = $_REQUEST['_url'];
-    unset($_REQUEST['_url']);
-    $log = $_SERVER['REQUEST_METHOD'] . ' ';
-    $log .= empty($_REQUEST) ? $_url : ($_url . '?' . urldecode(http_build_query($_REQUEST)));
+    $separator = strpos($_SERVER['REQUEST_URI'], '?') ? '&' : '?';
+    $log = $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'];
+    $log .= file_get_contents("php://input") ? $separator . file_get_contents("php://input") : '';
     $di->get('logger', [date('Ym')])->log($log, Logger::INFO);
 }
