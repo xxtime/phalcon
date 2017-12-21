@@ -2,6 +2,11 @@
 基于高性能的开源框架Phalcon开发, 集成Composer组件, 集成Redis,Mongodb支持  
 
 
+[![GitHub license](https://img.shields.io/github/license/xxtime/phalcon.svg)](https://github.com/xxtime/phalcon)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/xxtime/phalcon.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fxxtime%2Fphalcon)
+
+
+
 ## 环境
 * PHP >= 5.5
 * composer
