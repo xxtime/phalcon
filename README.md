@@ -41,6 +41,14 @@ AliDaYu | 短信功能  | [docs](http://www.alidayu.com/)
 Awesome PHP | 更多组件  | [docs](https://github.com/ziadoz/awesome-php)
 
 
+## 资料
+* [awesome](https://github.com/sindresorhus/awesome)  
+* [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php)  
+* [JingwenTian/awesome-php](https://github.com/JingwenTian/awesome-php)  
+* [jobbole/awesome-php-cn](https://github.com/jobbole/awesome-php-cn)  
+* [phalcon/awesome-phalcon](https://github.com/phalcon/awesome-phalcon)
+
+
 ## 关于
 项目: [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon)  
 作者: [https://www.xxtime.com](https://www.xxtime.com)  
