@@ -9,15 +9,11 @@
 use Phalcon\Loader;
 use Phalcon\Mvc\Application;
 
-if (!file_exists(BASE_DIR . '/vendor/autoload.php')) {
-    die('Run Command: composer install');
-}
+require ROOT_DIR . '/vendor/autoload.php';
 
-include BASE_DIR . '/vendor/autoload.php';
+require APP_DIR . "/bootstrap/services.php";
 
-include APP_DIR . "/bootstrap/services.php";
-
-include APP_DIR . "/bootstrap/setting.php";
+require APP_DIR . "/bootstrap/setting.php";
 
 $loader = new Loader();
 $loader->registerNamespaces(array(

@@ -37,7 +37,7 @@ $di->set('router', function () {
 
 
 $di->set('logger', function ($file = null) {
-    $logger = new FileLogger(BASE_DIR . '/running/logs/' . ($file ? $file : date('Ymd')));
+    $logger = new FileLogger(ROOT_DIR . '/storage/logs/' . ($file ? $file : date('Ymd')));
     $logger->setFormatter(new Line("[%date%][%type%] %message%", 'Y-m-d H:i:s O'));
     return $logger;
 }, false);
@@ -51,6 +51,7 @@ $di->set('crypt', function () use ($di) {
 
 
 $di->set('session', function () {
+    ini_set('session.save_path', ROOT_DIR . '/storage/sessions/');
     $session = new SessionAdapter();
     $session->start();
     return $session;
@@ -79,7 +80,7 @@ $di->set('modelsCache', function () use ($di) {
             'prefix' => 'cache|',
         ]);
     }
-    return new FileCache($frontCache, ['cacheDir' => BASE_DIR . '/running/cache/', 'prefix' => 'cache_']);
+    return new FileCache($frontCache, ['cacheDir' => ROOT_DIR . '/storage/cache/', 'prefix' => 'cache_']);
 }, true);
 
 

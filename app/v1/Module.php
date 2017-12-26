@@ -44,7 +44,7 @@ class Module implements ModuleDefinitionInterface
             $view->registerEngines([
                 '.phtml' => function ($view, $di) {
                     $volt = new Volt($view, $di);
-                    $volt->setOptions(['compiledPath' => BASE_DIR . '/running/cache/']);
+                    $volt->setOptions(['compiledPath' => ROOT_DIR . '/storage/cache/']);
                     return $volt;
                 }
             ]);
