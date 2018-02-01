@@ -4,13 +4,6 @@
  * @name    routes .php
  * @author  joe@xxtime.com
  * @link    https://docs.phalconphp.com/zh/3.2/routing
- *
- * Not Found
- * $router->notFound([
- *     'controller' => 'public',
- *     'action'     => 'show404',
- * ]);
- *
  */
 use Phalcon\Mvc\Router;
 
@@ -18,6 +11,11 @@ use Phalcon\Mvc\Router;
 $router = new Router(false);
 $router->removeExtraSlashes(true);
 
+// Not Found
+$router->notFound([
+    'controller' => 'public',
+    'action'     => 'notFound',
+]);
 
 // 通用路由
 $router->add(

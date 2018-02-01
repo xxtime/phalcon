@@ -15,9 +15,9 @@ class PublicController extends Controller
     }
 
 
-    public function show404Action()
+    public function notFoundAction()
     {
-        return $this->response->setJsonContent(['code' => 1, 'msg' => _('not found')])->send();
+        $this->view->pick("public/notFound");
     }
 
 }
