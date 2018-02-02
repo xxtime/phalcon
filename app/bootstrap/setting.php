@@ -2,6 +2,9 @@
 
 
 use Phalcon\Logger;
+use Phalcon\Dispatcher;
+use Phalcon\Events\Event;
+use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
 
 
 ini_set("date.timezone", $di['config']->setting->timezone);
@@ -24,3 +27,33 @@ if ($di['config']->setting->logs) {
     $log .= file_get_contents("php://input") ? $separator . file_get_contents("php://input") : '';
     $di->get('logger', [date('Ym')])->log($log, Logger::INFO);
 }
+
+
+$di['eventsManager']->attach('db', function ($event, $connection) use ($di) {
+    if ($event->getType() == 'beforeQuery') {
+        if ($di['config']->setting->logs) {
+            $di->get('logger', ['SQL' . date('Ymd')])->log($connection->getSQLStatement());
+        }
+        if (preg_match('/drop|alter/i', $connection->getSQLStatement())) {
+            return false;
+        }
+    }
+});
+
+
+$di['eventsManager']->attach(
+    'dispatch:beforeException',
+    function (Event $event, $dispatcher, Exception $exception) {
+        if ($exception instanceof DispatchException) {
+        }
+        switch ($exception->getCode()) {
+            case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+            case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+                $dispatcher->forward([
+                    'controller' => 'public',
+                    'action'     => 'notFound',
+                ]);
+                return false;
+        }
+    }
+);

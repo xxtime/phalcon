@@ -32,9 +32,10 @@ class Module implements ModuleDefinitionInterface
      */
     public function registerServices(DiInterface $di)
     {
-        $di->set('dispatcher', function () {
+        $di->set('dispatcher', function () use ($di) {
             $dispatcher = new Dispatcher();
             $dispatcher->setDefaultNamespace('MyApp\V1\Controllers');
+            $dispatcher->setEventsManager($di['eventsManager']);
             return $dispatcher;
         }, true);
 

@@ -84,18 +84,6 @@ $di->set('modelsCache', function () use ($di) {
 }, true);
 
 
-$di['eventsManager']->attach('db', function ($event, $connection) use ($di) {
-    if ($event->getType() == 'beforeQuery') {
-        if ($di['config']->setting->logs) {
-            $di->get('logger', ['SQL' . date('Ymd')])->log($connection->getSQLStatement());
-        }
-        if (preg_match('/drop|alter/i', $connection->getSQLStatement())) {
-            return false;
-        }
-    }
-});
-
-
 $di->set('cache', function () use ($di) {
     $redis = new Redis();
     $redis->connect($di['config']->cache->host, $di['config']->cache->port);
