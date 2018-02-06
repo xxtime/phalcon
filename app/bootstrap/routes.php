@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @name    routes .php
+ * @name    routes.php
  * @author  joe@xxtime.com
  * @link    https://docs.phalconphp.com/zh/3.2/routing
  */

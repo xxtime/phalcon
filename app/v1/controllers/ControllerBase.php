@@ -12,14 +12,7 @@ class ControllerBase extends Controller
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
-        $lang = $this->request->get('lang');
-        if ($lang) {
-            setlocale(LC_ALL, $lang);
-            $domain = $lang;
-            bind_textdomain_codeset($domain, 'UTF-8');
-            bindtextdomain($domain, APP_DIR . '/lang');
-            textdomain($domain);
-        }
+        // $this->locale->setLocale('en_US');
     }
 
 

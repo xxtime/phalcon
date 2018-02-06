@@ -16,6 +16,7 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
+    MyApp\Services\Locale,
     Symfony\Component\Yaml\Yaml as SFYaml,
     MongoDB\Client as MongoDBClient;
 
@@ -55,6 +56,11 @@ $di->set('session', function () {
     $session = new SessionAdapter();
     $session->start();
     return $session;
+}, true);
+
+
+$di->set('locale', function () {
+    return new Locale();
 }, true);
 
 

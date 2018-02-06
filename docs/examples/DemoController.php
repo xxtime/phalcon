@@ -31,8 +31,8 @@ class DemoController extends Controller
     }
 
 
-    // http://docs.phalconphp.com/zh/latest/reference/filter.html
-    // http://docs.phalconphp.com/zh/latest/reference/request.html
+    // @see http://docs.phalconphp.com/zh/latest/reference/filter.html
+    // @see http://docs.phalconphp.com/zh/latest/reference/request.html
     public function initialize()
     {
         // parent::initialize();
@@ -53,7 +53,7 @@ class DemoController extends Controller
     }
 
 
-    // 查找 https://docs.phalconphp.com/zh/latest/reference/models.html#binding-parameters
+    // @see https://docs.phalconphp.com/zh/latest/reference/models.html#binding-parameters
     public function findAction()
     {
         $robots = $this->demoModel->find(
@@ -161,7 +161,7 @@ class DemoController extends Controller
     }
 
 
-    //https://docs.phalconphp.com/en/latest/reference/cookies.html
+    // @see https://docs.phalconphp.com/en/latest/reference/cookies.html
     public function cookiesAction()
     {
         $this->cookies->set('foo', 'some cookies', time() + 86400);
@@ -174,7 +174,7 @@ class DemoController extends Controller
     }
 
 
-    // link https://docs.phalconphp.com/zh/latest/reference/volt.html
+    // @see https://docs.phalconphp.com/zh/latest/reference/volt.html
     public function templateAction()
     {
         $this->view->data = time();
@@ -212,10 +212,38 @@ class DemoController extends Controller
         if ($checkResult) {
             echo 'OK';
             dd($secret, $oneCode);
-        } else {
+        }
+        else {
             echo 'FAILED';
         }
         exit;
     }
+
+
+    // @see https://docs.phalconphp.com/zh/3.2/translate
+    // @see MyApp\Services\Locale
+    public function translatorAction()
+    {
+        // method one
+        $this->locale->t('hi', ['name' => 'Joe Chu']);
+        // method two
+        $this->locale->_('hi', ['name' => 'Joe Chu']);
+
+        // also can write like this
+        // $this->view->text = $this->locale;           // in the controller
+        // {{text->_('hi', ['name' => 'Joe Chu'])}}     // in the view file
+    }
+
+
+    // PHP gettext
+    // translation file locale: app/locale/zh_CN/LC_MESSAGES/zh_CN.mo
+    // @see http://php.net/manual/en/book.gettext.php
+    //
+    // $lang = 'zh_CN';
+    // setlocale(LC_ALL, $lang);
+    // $domain = $lang;
+    // bind_textdomain_codeset($domain, 'UTF-8');
+    // bindtextdomain($domain, APP_DIR . '/locale');
+    // textdomain($domain);
 
 }

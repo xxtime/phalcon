@@ -7,6 +7,9 @@ setting:
   logs        : false
   security    : 0
 
+translate:
+  default     : en_US
+
 database:
   data:
     adapter   : Mysql
