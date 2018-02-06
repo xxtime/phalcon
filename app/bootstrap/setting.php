@@ -43,7 +43,10 @@ $di['eventsManager']->attach('db', function ($event, $connection) use ($di) {
 
 $di['eventsManager']->attach(
     'dispatch:beforeException',
-    function (Event $event, $dispatcher, Exception $exception) {
+    function (Event $event, $dispatcher, Exception $exception) use ($di) {
+        if ($di['config']->setting->sandbox) {
+            return true;
+        }
         if ($exception instanceof DispatchException) {
         }
         switch ($exception->getCode()) {
