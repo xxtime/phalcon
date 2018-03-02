@@ -12,7 +12,9 @@ ini_set("date.timezone", $di['config']->setting->timezone);
 
 switch ($di['config']->setting->sandbox) {
     case true:
-        include APP_DIR . '/plugins/' . 'Exception.php';
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        $whoops->register();
         error_reporting(E_ALL);
         break;
     default:

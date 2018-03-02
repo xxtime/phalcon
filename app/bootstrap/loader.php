@@ -10,9 +10,8 @@ use Phalcon\Loader;
 use Phalcon\Mvc\Application;
 
 require ROOT_DIR . '/vendor/autoload.php';
-
+require APP_DIR . '/plugins/helpers.php';
 require APP_DIR . "/bootstrap/services.php";
-
 require APP_DIR . "/bootstrap/setting.php";
 
 $loader = new Loader();
