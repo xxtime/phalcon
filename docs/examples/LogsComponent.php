@@ -6,13 +6,13 @@
  * @link https://docs.phalconphp.com/zh/latest/reference/logging.html#implementing-your-own-adapters
  * @link https://docs.phalconphp.com/zh/latest/api/Phalcon_Logger_AdapterInterface.html
  */
-namespace MyApp\Services;
+namespace App\Providers\Components;
 
 
 use Phalcon\Logger\AdapterInterface;
 use Phalcon\Logger\FormatterInterface;
 
-class Logs implements AdapterInterface
+class LogsComponent implements AdapterInterface
 {
 
     public function setFormatter(FormatterInterface $formatter)

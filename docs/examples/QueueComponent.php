@@ -6,7 +6,7 @@
  * @link http://www.rabbitmq.com/
  * @link https://github.com/php-amqplib/php-amqplib
  */
-namespace MyApp\Services;
+namespace App\Providers\Components;
 
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -15,7 +15,7 @@ use Phalcon\DI;
 
 // define('AMQP_DEBUG', true);
 
-class Queue
+class QueueComponent
 {
 
     /**

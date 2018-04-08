@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyApp\V1;
+namespace App\Http;
 
 
 use Phalcon\Loader;
@@ -15,14 +15,17 @@ use Phalcon\Mvc\ModuleDefinitionInterface;
 class Module implements ModuleDefinitionInterface
 {
 
+    // the same to /ROOT/app/bootstrap/loader.php
     public function registerAutoloaders(DiInterface $di = null)
     {
+        /*
         $loader = new Loader();
         $loader->registerNamespaces([
-            'MyApp\V1\Controllers' => '../app/v1/controllers/',
-            'MyApp\V1\Models'      => '../app/v1/models/',
+            'App\Http\Controllers' => '../app/http/Controllers/',
+            'App\Http\Models'      => '../app/http/Models/',
         ]);
         $loader->register();
+        */
     }
 
 
@@ -34,14 +37,14 @@ class Module implements ModuleDefinitionInterface
     {
         $di->set('dispatcher', function () use ($di) {
             $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace('MyApp\V1\Controllers');
+            $dispatcher->setDefaultNamespace('App\Http\Controllers');
             $dispatcher->setEventsManager($di['eventsManager']);
             return $dispatcher;
         }, true);
 
         $di->set('view', function () use ($di) {
             $view = new View();
-            $view->setViewsDir('../app/v1/views/');
+            $view->setViewsDir('../app/http/Views/');
             $view->registerEngines([
                 '.phtml' => function ($view, $di) {
                     $volt = new Volt($view, $di);

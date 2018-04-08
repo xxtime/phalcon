@@ -1,53 +1,19 @@
-setting:
-  appId       : xxtime
-  appKey      : xxxxxxxxxxxxxxxx
+env:
+  name        : Phalcon
+  key         : 61a89067accc701a
+  cipher      : AES-256-CBC
   timezone    : UTC
-  cacheTime   : 600
+  locale      : en_US
   sandbox     : false
   logs        : false
-  security    : 0
-
-translate:
-  default     : en_US
-
-database:
-  data:
-    adapter   : Mysql
-    host      : localhost
-    port      : 3306
-    user      : root
-    pass      : 123456
-    db        : test
-    charset   : utf8mb4
-  logs:
-    adapter   : Mysql
-    host      : localhost
-    port      : 3306
-    user      : root
-    pass      : 123456
-    dbname    : test
-    charset   : utf8mb4
-
-redis:
-    host      : 127.0.0.1
-    port      : 6379
-    db        : 1
-
-mongodb:
-    user      :
-    pass      :
-    host      : 127.0.0.1
-    port      : 27017
-    db        :
+  disableView : false
+  url         : http://localhost
 
 cache:
     host      : 127.0.0.1
     port      : 6379
     db        : 0
 
-mq:
-    host      :
-    port      :
-    user      :
-    pass      :
-    vhost     :
+include:
+  - database
+  - providers

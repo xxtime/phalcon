@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyApp\V1\Controllers;
+namespace App\Http\Controllers;
 
 
 class IndexController extends ControllerBase

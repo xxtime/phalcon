@@ -2,15 +2,12 @@
 
 
 use Phalcon\Logger;
-use Phalcon\Dispatcher;
-use Phalcon\Events\Event;
-use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
 
 
-ini_set("date.timezone", $di['config']->setting->timezone);
+ini_set("date.timezone", $di['config']->env->timezone);
 
 
-switch ($di['config']->setting->sandbox) {
+switch ($di['config']->env->sandbox) {
     case true:
         $whoops = new \Whoops\Run;
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -23,7 +20,7 @@ switch ($di['config']->setting->sandbox) {
 };
 
 
-if ($di['config']->setting->logs) {
+if ($di['config']->env->logs) {
     $separator = strpos($_SERVER['REQUEST_URI'], '?') ? '&' : '?';
     $log = $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'];
     $log .= file_get_contents("php://input") ? $separator . file_get_contents("php://input") : '';
@@ -31,34 +28,8 @@ if ($di['config']->setting->logs) {
 }
 
 
-$di['eventsManager']->attach('db', function ($event, $connection) use ($di) {
-    if ($event->getType() == 'beforeQuery') {
-        if ($di['config']->setting->logs) {
-            $di->get('logger', ['SQL' . date('Ymd')])->log($connection->getSQLStatement());
-        }
-        if (preg_match('/drop|alter/i', $connection->getSQLStatement())) {
-            return false;
-        }
+if (count($di['config']['providers']['listeners']) > 0) {
+    foreach ($di['config']['providers']['listeners'] as $name => $listener) {
+        $di['eventsManager']->attach($name, new $listener);
     }
-});
-
-
-$di['eventsManager']->attach(
-    'dispatch:beforeException',
-    function (Event $event, $dispatcher, Exception $exception) use ($di) {
-        if ($di['config']->setting->sandbox) {
-            return true;
-        }
-        if ($exception instanceof DispatchException) {
-        }
-        switch ($exception->getCode()) {
-            case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
-            case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
-                $dispatcher->forward([
-                    'controller' => 'public',
-                    'action'     => 'notFound',
-                ]);
-                return false;
-        }
-    }
-);
+}

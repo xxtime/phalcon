@@ -1,14 +1,18 @@
 <?php
 
-namespace MyApp\Controllers;
+/**
+ * @name    \App\Http\Controllers\DemoController.php
+ * @package /ROOT/app/http/controller/DemoController.php
+ */
+namespace App\Http\Controllers;
 
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Filter;
-use MyApp\Models\Demo;
-use MyApp\Services\Services;
-use MyApp\Services\Queue;
+use App\Http\Models\DemoModel;
+use App\Providers\Components\Services;
+use App\Providers\Components\Queue;
 use Endroid\QrCode\QrCode;
 use PHPGangsta_GoogleAuthenticator;
 
@@ -36,7 +40,7 @@ class DemoController extends Controller
     public function initialize()
     {
         // parent::initialize();
-        $this->demoModel = new Demo();
+        $this->demoModel = new DemoModel();
 
 
         // 过滤器

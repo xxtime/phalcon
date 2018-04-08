@@ -1,6 +1,6 @@
 {
   "require": {
-    "filp/whoops": "dev-master",
+    "filp/whoops": "~2.1",
     "symfony/var-dumper": "~2|~3",
     "symfony/yaml": "~3"
   }

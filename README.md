@@ -1,28 +1,31 @@
-## 介绍
-基于高性能的开源框架Phalcon开发, 集成Composer组件, 集成Redis,Mongodb支持  
+## About Phalcon
+* A framework which use phalcon
+* High performance
+* Composer
+* Database support Redis, MongoDB, MySql
+* Event listener
+* Middleware
+* I18n translate
+* Debugging easier with whoops project
 
 
-[![GitHub license](https://img.shields.io/github/license/xxtime/phalcon.svg)](https://github.com/xxtime/phalcon)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/xxtime/phalcon.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fxxtime%2Fphalcon)
+## Environment
+* php >=5.6  
+* composer  
 
 
+## How to use
+copy /ROOT/app/config/.app.yml to /ROOT/app/config/app.yml  
 
-## 环境
-* PHP >= 5.5
-* composer
-* [redis](https://pecl.php.net/package/redis) - 可选
-* [mongoDb](https://pecl.php.net/package/mongodb) - 可选
+* config files /ROOT/app/config  
+* documents /ROOT/docs  
+* debug function dd(), dump()  
 
-
-## 使用
-* 首次安装调试时,需要将配置目录下.app.yml 修改为app.yml
-* 文档在docs目录下
-
-
-## 组件
-
-组件 | 说明 | 文档
+## Component
+component | intro | document
 --- | --- | ---
+[zendframework/zend-permissions-rbac](https://packagist.org/packages/zendframework/zend-permissions-rbac) | RBAC  | [docs](https://docs.zendframework.com/zend-permissions-rbac/)
+[zendframework/zend-crypt](https://packagist.org/packages/zendframework/zend-crypt) | 加密和密码HASH  | [docs](https://docs.zendframework.com/zend-crypt/)
 [firebase/php-jwt](https://packagist.org/packages/firebase/php-jwt) | JWT(JSON Web Tokens)  | [docs](https://github.com/firebase/php-jwt)
 [endroid/qrcode](https://packagist.org/packages/endroid/qrcode) | 用于生成二维码  | [docs](https://endroid.nl/)
 [phpgangsta/googleauthenticator](https://packagist.org/packages/phpgangsta/googleauthenticator) | 令牌验证相关  | [docs](https://github.com/PHPGangsta/GoogleAuthenticator)
@@ -37,19 +40,22 @@
 [mongodb/mongodb](https://packagist.org/packages/mongodb/mongodb) | MongoDB抽象层  | [docs](https://docs.mongodb.com/php-library/)
 [hashids/hashids](https://packagist.org/packages/hashids/hashids) | Hashids  |[docs](http://hashids.org/php/)
 [league/climate](https://packagist.org/packages/league/climate) | 命令行颜色  | [docs](http://climate.thephpleague.com/)
-AliDaYu | 短信功能  | [docs](http://www.alidayu.com/)
-Awesome PHP | 更多组件  | [docs](https://github.com/ziadoz/awesome-php)
 
 
-## 资料
-* [awesome](https://github.com/sindresorhus/awesome)  
-* [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php)  
-* [JingwenTian/awesome-php](https://github.com/JingwenTian/awesome-php)  
-* [jobbole/awesome-php-cn](https://github.com/jobbole/awesome-php-cn)  
-* [phalcon/awesome-phalcon](https://github.com/phalcon/awesome-phalcon)
+## Reference
+* [Aura](http://auraphp.com/)  
+* [Hoa](https://hoa-project.net/En/)  
+* [thephpleague](http://thephpleague.com/)  
+* [zend framework components](https://docs.zendframework.com/)  
+* [symfony components](http://symfony.com/doc/current/components/index.html)  
+* [github awesome lists](https://github.com/sindresorhus/awesome)  
+* [github ziadoz awesome-php](https://github.com/ziadoz/awesome-php)  
+* [github JingwenTian awesome-php](https://github.com/JingwenTian/awesome-php)  
+* [github jobbole awesome-php-cn](https://github.com/jobbole/awesome-php-cn)  
+* [github phalcon awesome-phalcon](https://github.com/phalcon/awesome-phalcon)
 
 
-## 关于
-项目: [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon)  
-作者: [https://www.xxtime.com](https://www.xxtime.com)  
-文档: [https://docs.phalconphp.com](https://docs.phalconphp.com)
+## About  
+* Project : [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon)  
+* Document : [https://docs.phalconphp.com](https://docs.phalconphp.com)
+* Author : [https://www.xxtime.com](https://www.xxtime.com)  

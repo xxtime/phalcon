@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Services;
+namespace App\Providers\Components;
 
 
 use Phalcon\Mvc\User\Component;
@@ -20,20 +20,17 @@ class Locale extends Component
         if ($this->locale) {
             return $this->locale;
         }
-        return $this->config->translate->default;
+        return $this->config['env']['locale'];
     }
 
 
     public function setLocale($locale = 'en_US')
     {
-        if (!$locale || !file_exists(APP_DIR . '/locale/' . $locale)) {
-            return false;
-        }
         $this->locale = $locale;
     }
 
 
-    public function t(string $translateKey, array $placeholders = null)
+    public function t($translateKey, array $placeholders = null)
     {
         if (!$this->translator) {
             $this->translator = $this->getTranslator();
@@ -42,21 +39,21 @@ class Locale extends Component
     }
 
 
-    public function _(string $translateKey, array $placeholders = null)
+    public function _($translateKey, array $placeholders = null)
     {
         return $this->t($translateKey, $placeholders);
     }
 
 
-    private function getTranslator(string $file = 'message')
+    private function getTranslator($file = 'message')
     {
         $path = APP_DIR . '/locale/' . $this->getLocale() . DIRECTORY_SEPARATOR . $file . '.php';
 
         if (file_exists($path)) {
-            $messages = require $path;
+            $messages = include $path;
         }
         else {
-            $messages = require APP_DIR . '/locale/en_US/' . $file . '.php';
+            $messages = include APP_DIR . '/locale/' . $this->config['env']['locale'] . DIRECTORY_SEPARATOR . $file . '.php';
         }
 
         return new NativeArray(['content' => $messages]);

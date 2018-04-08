@@ -2,22 +2,18 @@
 
 
 use Phalcon\DI\FactoryDefault,
-    Phalcon\Mvc\Url as UrlResolver,
     Phalcon\Crypt,
     Phalcon\Config,
     Phalcon\Config\Adapter\Yaml,
-    Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter,
-    Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter,
+    Phalcon\Db\Adapter\Pdo\Mysql,
     Phalcon\Session\Adapter\Files as SessionAdapter,
-    Phalcon\Http\Response\Cookies,
-    Phalcon\Events\Manager as EventsManager,
     Phalcon\Logger\Adapter\File as FileLogger,
     Phalcon\Logger\Formatter\Line,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
-    MyApp\Services\Locale,
-    Symfony\Component\Yaml\Yaml as SFYaml,
+    App\Providers\Components\Locale,
+    Symfony\Component\Yaml\Yaml as SymfonyYaml,
     MongoDB\Client as MongoDBClient;
 
 
@@ -26,14 +22,27 @@ $di = new FactoryDefault();
 
 $di->set('config', function () {
     if (function_exists('yaml_parse_file')) {
-        return new Yaml(APP_DIR . "/config/app.yml");
+        $config = new Yaml(CONFIG_DIR . "/app.yml");
     }
-    return new Config(SFYaml::parse(file_get_contents(APP_DIR . "/config/app.yml")));
+    else {
+        $config = new Config(SymfonyYaml::parse(file_get_contents(CONFIG_DIR . "/app.yml")));
+    }
+    if ($config['include']) {
+        foreach ($config['include'] as $item) {
+            $config[$item] = include CONFIG_DIR . '/' . $item . '.php';
+        }
+    }
+    return $config;
+}, true);
+
+
+$di->set('locale', function () {
+    return new Locale();
 }, true);
 
 
 $di->set('router', function () {
-    return require APP_DIR . '/bootstrap/routes.php';
+    return require CONFIG_DIR . '/routes.php';
 }, true);
 
 
@@ -46,7 +55,7 @@ $di->set('logger', function ($file = null) {
 
 $di->set('crypt', function () use ($di) {
     $crypt = new Crypt();
-    $crypt->setKey($di['config']->setting->appKey);
+    $crypt->setKey($di['config']->env->key);
     return $crypt;
 }, true);
 
@@ -59,25 +68,8 @@ $di->set('session', function () {
 }, true);
 
 
-$di->set('locale', function () {
-    return new Locale();
-}, true);
-
-
-$di->set('url', function () {
-    $url = new UrlResolver();
-    $url->setBaseUri('/');
-    return $url;
-}, true);
-
-
-$di->set('modelsMetadata', function () {
-    return new MetaDataAdapter();
-}, true);
-
-
 $di->set('modelsCache', function () use ($di) {
-    $frontCache = new FrontData(["lifetime" => $di['config']->setting->cacheTime]);
+    $frontCache = new FrontData(["lifetime" => 60]);
     if (isset($di['config']->cache)) {
         return new RedisCache($frontCache, [
             'host'   => $di['config']->cache->host,
@@ -98,34 +90,34 @@ $di->set('cache', function () use ($di) {
 }, true);
 
 
+$di->set('db', function () use ($di) {
+    $connection = new Mysql([
+        'host'     => $di['config']['database']['mysql']['host'],
+        'port'     => $di['config']['database']['mysql']['port'],
+        'username' => $di['config']['database']['mysql']['user'],
+        'password' => $di['config']['database']['mysql']['pass'],
+        'dbname'   => $di['config']['database']['mysql']['database'],
+        'charset'  => $di['config']['database']['mysql']['charset']
+    ]);
+    $connection->setEventsManager($di['eventsManager']);
+    return $connection;
+}, true);
+
+
 $di->set('redis', function () use ($di) {
     $redis = new Redis();
-    $redis->connect($di['config']->redis->host, $di['config']->redis->port);
-    $redis->select($di['config']->redis->db);
+    $redis->connect($di['config']['database']['redis']['host'], $di['config']['database']['redis']['port']);
+    $redis->select($di['config']['database']['redis']['database']);
     return $redis;
 }, true);
 
 
 $di->set('mongodb', function () use ($di) {
-    return new MongoDBClient("mongodb://" . $di['config']->mongodb->host . ':' . $di['config']->mongodb->port, [
-        'username'   => $di['config']->mongodb->user,
-        'password'   => $di['config']->mongodb->pass,
-        'authSource' => $di['config']->mongodb->db
-    ]);
+    return new MongoDBClient(
+        "mongodb://" . $di['config']['database']['mongodb']['host'] . ':' . $di['config']['database']['mongodb']['port'],
+        array_filter([
+            'username'   => $di['config']['database']['mongodb']['user'],
+            'password'   => $di['config']['database']['mongodb']['pass'],
+            'authSource' => $di['config']['database']['mongodb']['database']
+        ]));
 }, true);
-
-
-foreach ($di['config']['database'] as $db => $value) {
-    $di->set($db, function () use ($di, $value) {
-        $connection = new DbAdapter([
-            'host'     => $value['host'],
-            'port'     => $value['port'],
-            'username' => $value['user'],
-            'password' => $value['pass'],
-            'dbname'   => $value['db'],
-            'charset'  => $value['charset']
-        ]);
-        $connection->setEventsManager($di['eventsManager']);
-        return $connection;
-    }, true);
-}

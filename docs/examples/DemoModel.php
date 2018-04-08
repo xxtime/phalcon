@@ -1,13 +1,18 @@
 <?php
 
-namespace MyApp\Models;
+/**
+ * @name    \App\Http\Models\DemoModel
+ * @package /ROOT/app/http/models/DemoModel.php
+ */
+
+namespace App\Http\Models;
 
 
 use Phalcon\Mvc\Model;
 use Phalcon\DI;
 use Phalcon\Db;
 
-class Demo extends Model
+class DemoModel extends Model
 {
 
     private $dbConnectionData;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MyApp\V1\Controllers;
+namespace App\Http\Controllers;
 
 
 use Phalcon\Mvc\Controller;
@@ -12,7 +12,6 @@ class ControllerBase extends Controller
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)
     {
-        // $this->locale->setLocale('en_US');
     }
 
 

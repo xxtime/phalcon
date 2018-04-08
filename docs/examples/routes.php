@@ -1,30 +1,28 @@
 <?php
 
 /**
- * @name    routes.php
- * @author  joe@xxtime.com
- * @link    https://docs.phalconphp.com/zh/3.2/routing
+ * @name    /ROOT/app/config/routes.php
+ * @link    https://docs.phalconphp.com/zh/3.3/routing
  */
+
 use Phalcon\Mvc\Router;
 
 
 $router = new Router(false);
 $router->removeExtraSlashes(true);
 
-// Not Found
-$router->notFound(['controller' => 'public', 'action' => 'notFound']);
+$router->notFound(['controller' => 'default', 'action' => 'notFound']);
+$router->add('/', ['controller' => 'default', 'action' => 'index']);
 
-// Default
-$router->add('/', ['controller' => 'index']);
 $router->add('/:controller', ['controller' => 1]);
 $router->add('/:controller/:action/:params', ['controller' => 1, 'action' => 2, 'params' => 3]);
 
-// Module
 $router->add('/(v[0-9]+)/:controller/:action/:params', ['module' => 1, 'controller' => 2, 'action' => 3, 'params' => 4]);
 $router->add('/(v[0-9]+)/:controller', ['module' => 1, 'controller' => 2]);
 
-// Default Module
 $router->setDefaultModule('v1');
-
+$router->setDefaultNamespace('App\Http\Controllers');
+$router->setDefaultController('index');
+$router->setDefaultAction('index');
 
 return $router;
