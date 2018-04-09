@@ -15,11 +15,14 @@
 
 
 ## How to use
-copy /ROOT/app/config/.app.yml to /ROOT/app/config/app.yml  
+1. cd to /ROOT/app/config/
+2. copy .app.yml to app.yml  
+3. copy .database.php to database.php
+4. copy .providers.php to providers.php
 
-* config files /ROOT/app/config  
-* documents /ROOT/docs  
-* debug function dd(), dump()  
+## Tree
+* /ROOT/app/config  -   config files  
+* /ROOT/docs        -   documents files  
 
 ## Component
 component | intro | document
