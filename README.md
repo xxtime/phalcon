@@ -14,15 +14,20 @@
 * composer  
 
 
+## Advice
+* Mcrypt was DEPRECATED in PHP 7.1.0, and REMOVED in PHP 7.2.0.
+
+
 ## How to use
 1. cd to /ROOT/app/config/
 2. copy .app.yml to app.yml  
 3. copy .database.php to database.php
 4. copy .providers.php to providers.php
 
-## Tree
+## File path
 * /ROOT/app/config  -   config files  
 * /ROOT/docs        -   documents files  
+
 
 ## Component
 component | intro | document

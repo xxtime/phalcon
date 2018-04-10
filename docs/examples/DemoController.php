@@ -224,8 +224,8 @@ class DemoController extends Controller
     }
 
 
-    // @see https://docs.phalconphp.com/zh/3.2/translate
-    // @see MyApp\Services\Locale
+    // @see https://docs.phalconphp.com/zh/3.3/translate
+    // @see /ROOT/app/providers/Components/Locale.php
     public function translatorAction()
     {
         // method one

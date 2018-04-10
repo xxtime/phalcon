@@ -19,9 +19,9 @@ class DemoModel extends Model
 
     public function initialize()
     {
-        $this->setConnectionService('dbData');
+        $this->setConnectionService('db');
         $this->setSource("users");
-        $this->dbConnectionData = DI::getDefault()->get('dbData');
+        $this->dbConnectionData = DI::getDefault()->get('db');
     }
 
 
@@ -33,14 +33,14 @@ class DemoModel extends Model
         $sql = "INSERT INTO `robots`(`name`, `year`) VALUES (?, ?)";
         $sql = "UPDATE `robots` SET `name` = ? WHERE `id` = ?";
         $sql = "DELETE FROM `robots` WHERE `name`=? AND `id` = ?";
-        $success = DI::getDefault()->get('dbData')->execute($sql, array('JoeChu', 1987));
+        $success = DI::getDefault()->get('db')->execute($sql, array('JoeChu', 1987));
 
 
         // 可用以下操作替换上述方法
 
 
         // 插入 方法一
-        $success = DI::getDefault()->get('dbData')->insert(
+        $success = DI::getDefault()->get('db')->insert(
             "robots",
             array("JoeChu", 1987),
             array("name", "year")
@@ -48,7 +48,7 @@ class DemoModel extends Model
 
 
         // 插入 方法二
-        $success = DI::getDefault()->get('dbData')->insertAsDict(
+        $success = DI::getDefault()->get('db')->insertAsDict(
             "robots",
             array(
                 "name" => "JoeChu",
@@ -58,7 +58,7 @@ class DemoModel extends Model
 
 
         // 更新 方法一
-        $success = DI::getDefault()->get('dbData')->update(
+        $success = DI::getDefault()->get('db')->update(
             "robots",
             array("name"),
             array("JoeChu"),
@@ -71,7 +71,7 @@ class DemoModel extends Model
 
 
         // 更新 方法二
-        $success = DI::getDefault()->get('dbData')->updateAsDict(
+        $success = DI::getDefault()->get('db')->updateAsDict(
             "robots",
             array(
                 "name" => "JoeChu"
@@ -85,7 +85,7 @@ class DemoModel extends Model
 
 
         // 删除
-        $success = DI::getDefault()->get('dbData')->delete("robots", "id = ?", array(101));
+        $success = DI::getDefault()->get('db')->delete("robots", "id = ?", array(101));
     }
 
 
@@ -95,7 +95,7 @@ class DemoModel extends Model
         // link https://docs.phalconphp.com/zh/latest/reference/db.html#binding-parameters
         $sql = "SELECT * FROM users WHERE username=:username";
         $bind = array('username' => 'demo@xxtime.com');
-        $query = DI::getDefault()->get('dbData')->query($sql, $bind); //$query->numRows();
+        $query = DI::getDefault()->get('db')->query($sql, $bind); //$query->numRows();
         $query->setFetchMode(Db::FETCH_ASSOC);
         $data = $query->fetchAll(); // fetch
         dump($sql, $data);
@@ -108,19 +108,19 @@ class DemoModel extends Model
 
         try {
             // 开始一个事务
-            DI::getDefault()->get('dbData')->begin();
+            DI::getDefault()->get('db')->begin();
 
             // 执行一些操作
-            DI::getDefault()->get('dbData')->execute("DELETE `robots` WHERE `id` = 101");
-            DI::getDefault()->get('dbData')->execute("DELETE `robots` WHERE `id` = 102");
-            DI::getDefault()->get('dbData')->execute("DELETE `robots` WHERE `id` = 103");
+            DI::getDefault()->get('db')->execute("DELETE `robots` WHERE `id` = 101");
+            DI::getDefault()->get('db')->execute("DELETE `robots` WHERE `id` = 102");
+            DI::getDefault()->get('db')->execute("DELETE `robots` WHERE `id` = 103");
 
             // 提交操作，如果一切正常
-            DI::getDefault()->get('dbData')->commit();
+            DI::getDefault()->get('db')->commit();
 
         } catch (Exception $e) {
             // 如果发现异常，回滚操作
-            DI::getDefault()->get('dbData')->rollback();
+            DI::getDefault()->get('db')->rollback();
         }
 
     }
