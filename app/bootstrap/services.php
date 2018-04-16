@@ -62,6 +62,9 @@ $di->set('crypt', function () use ($di) {
 
 $di->set('session', function () {
     ini_set('session.save_path', ROOT_DIR . '/storage/sessions/');
+    ini_set('session.gc_maxlifetime', 86400 * 30);
+    ini_set("session.cookie_lifetime", 86400 * 30);
+    ini_set('session.name', 'SID');
     $session = new SessionAdapter();
     $session->start();
     return $session;
