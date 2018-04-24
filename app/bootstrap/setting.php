@@ -10,7 +10,7 @@ ini_set("date.timezone", $di['config']->env->timezone);
 switch ($di['config']->env->sandbox) {
     case true:
         $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        $whoops->pushHandler($di['config']['env']['api'] ? new \Whoops\Handler\JsonResponseHandler : new \Whoops\Handler\PrettyPageHandler);
         $whoops->register();
         error_reporting(E_ALL);
         break;
