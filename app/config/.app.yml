@@ -4,7 +4,6 @@ env:
   cipher      : AES-256-CFB
   timezone    : UTC
   locale      : en_US
-  api         : false
   sandbox     : false
   logs        : false
   disableView : false
