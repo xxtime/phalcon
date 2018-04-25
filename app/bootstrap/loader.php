@@ -26,4 +26,4 @@ if ($di['config']->env->disableView) {
     $application->useImplicitView(false);
 }
 
-echo $application->handle()->getContent();
+$application->handle()->send();
