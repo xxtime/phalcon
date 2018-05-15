@@ -15,7 +15,7 @@ $router->removeExtraSlashes(true);
 $router->notFound(['controller' => 'default', 'action' => 'notFound']);
 $router->add('/', ['controller' => 'default', 'action' => 'index']);
 
-$router->setDefaultModule('v1');
+$router->setDefaultModule('m1');
 $router->setDefaultNamespace('App\Http\Controllers');
 $router->setDefaultController('index');
 $router->setDefaultAction('index');

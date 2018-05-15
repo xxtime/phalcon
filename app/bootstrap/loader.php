@@ -19,7 +19,7 @@ require APP_DIR . "/bootstrap/setting.php";
 $application = new Application($di);
 $application->setEventsManager($di['eventsManager']);
 $application->registerModules([
-    'v1' => ['className' => 'App\Http\Module', 'path' => APP_DIR . '/http/Module.php']
+    'm1' => ['className' => 'App\Http\Module', 'path' => APP_DIR . '/http/Module.php']
 ]);
 
 if ($di['config']->env->disableView) {
