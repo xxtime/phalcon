@@ -28,8 +28,8 @@ if ($di['config']->env->logs) {
 }
 
 
-if (count($di['config']['providers']['listeners']) > 0) {
-    foreach ($di['config']['providers']['listeners'] as $name => $listener) {
+if (count(config('providers.listeners')) > 0) {
+    foreach (config('providers.listeners') as $name => $listener) {
         $di['eventsManager']->attach($name, new $listener);
     }
 }

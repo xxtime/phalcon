@@ -29,7 +29,9 @@ $di->set('config', function () {
     }
     if ($config['include']) {
         foreach ($config['include'] as $item) {
-            $config[$item] = include CONFIG_DIR . '/' . $item . '.php';
+            $config[$item] = function () use ($item) {
+                return include CONFIG_DIR . '/' . $item . '.php';
+            };
         }
     }
     return $config;
@@ -95,12 +97,12 @@ $di->set('cache', function () use ($di) {
 
 $di->set('db', function () use ($di) {
     $connection = new Mysql([
-        'host'     => $di['config']['database']['mysql']['host'],
-        'port'     => $di['config']['database']['mysql']['port'],
-        'username' => $di['config']['database']['mysql']['user'],
-        'password' => $di['config']['database']['mysql']['pass'],
-        'dbname'   => $di['config']['database']['mysql']['database'],
-        'charset'  => $di['config']['database']['mysql']['charset']
+        'host'     => config('database.mysql.host'),
+        'port'     => config('database.mysql.port'),
+        'username' => config('database.mysql.user'),
+        'password' => config('database.mysql.pass'),
+        'dbname'   => config('database.mysql.db'),
+        'charset'  => config('database.mysql.charset')
     ]);
     $connection->setEventsManager($di['eventsManager']);
     return $connection;
@@ -109,18 +111,18 @@ $di->set('db', function () use ($di) {
 
 $di->set('redis', function () use ($di) {
     $redis = new Redis();
-    $redis->connect($di['config']['database']['redis']['host'], $di['config']['database']['redis']['port']);
-    $redis->select($di['config']['database']['redis']['database']);
+    $redis->connect(config('database.redis.host'), config('database.redis.port'));
+    $redis->select(config('database.redis.db'));
     return $redis;
 }, true);
 
 
 $di->set('mongodb', function () use ($di) {
     return new MongoDBClient(
-        "mongodb://" . $di['config']['database']['mongodb']['host'] . ':' . $di['config']['database']['mongodb']['port'],
+        "mongodb://" . config('database.mongodb.host') . ':' . config('database.mongodb.port'),
         array_filter([
-            'username'   => $di['config']['database']['mongodb']['user'],
-            'password'   => $di['config']['database']['mongodb']['pass'],
-            'authSource' => $di['config']['database']['mongodb']['database']
+            'username'   => config('database.mongodb.user'),
+            'password'   => config('database.mongodb.pass'),
+            'authSource' => config('database.mongodb.db')
         ]));
 }, true);
