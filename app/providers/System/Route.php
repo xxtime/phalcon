@@ -22,6 +22,9 @@ class Route
     private $resource;
 
 
+    private $allowAction = ['index', 'store', 'show', 'update', 'destroy'];
+
+
     private $_uri;
 
 
@@ -39,14 +42,12 @@ class Route
     public function addResource($uri = '', $handle = null, $idFormat = '{id:[a-z0-9]{1,24}}')
     {
         if (!$uri || !$handle) {
-            throw new Exception('add resource error');
+            throw new Exception('invalid resource');
         }
-        $action = ['index', 'store', 'show', 'update', 'destroy'];
         $this->_uri = $uri;
         $this->resource[$uri] = [
             'regular' => $idFormat,
             'handle'  => $handle,
-            'action'  => $action,
         ];
         return $this;
     }
@@ -60,7 +61,7 @@ class Route
 
     public function except(...$action)
     {
-        $this->resource[$this->_uri]['action'] = array_diff($this->resource[$this->_uri]['action'], $action);
+        $this->resource[$this->_uri]['action'] = array_diff($this->allowAction, $action);
     }
 
 
@@ -69,6 +70,9 @@ class Route
         foreach ($this->resource as $uri => $value) {
             $group = new Group(['controller' => $value['handle']]);
             $group->setPrefix($uri);
+            if (empty($value['action'])) {
+                $value['action'] = $this->allowAction;
+            }
             foreach ($value['action'] as $action) {
                 switch ($action) {
                     case 'index':
@@ -87,7 +91,7 @@ class Route
                         $group->addDelete('/' . $value['regular'], ['action' => 'destroy']);
                         break;
                     default:
-                        throw new Exception('action method error');
+                        throw new Exception('invalid route action');
                         $group->add('/' . $value['regular'], ['action' => $action]);
                 }
             }
