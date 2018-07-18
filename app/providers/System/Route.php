@@ -22,6 +22,9 @@ class Route
     private $resource;
 
 
+    private $idFormat = '{id:[a-z0-9]{1,24}}';
+
+
     private $allowAction = ['index', 'store', 'show', 'update', 'destroy'];
 
 
@@ -39,14 +42,30 @@ class Route
         $this->mountRoute();
     }
 
-    public function addResource($uri = '', $handle = null, $idFormat = '{id:[a-z0-9]{1,24}}')
+
+    public function setIdFormat($format = '')
+    {
+        if (!$format) {
+            return false;
+        }
+        $this->idFormat = $format;
+    }
+
+
+    public function getIdFormat()
+    {
+        return $this->idFormat;
+    }
+
+
+    public function addResource($uri = '', $handle = null, $idFormat = null)
     {
         if (!$uri || !$handle) {
             throw new Exception('invalid resource');
         }
         $this->_uri = $uri;
         $this->resource[$uri] = [
-            'regular' => $idFormat,
+            'regular' => $idFormat ? $idFormat : $this->getIdFormat(),
             'handle'  => $handle,
         ];
         return $this;
