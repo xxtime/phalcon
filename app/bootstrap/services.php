@@ -6,7 +6,6 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Config,
     Phalcon\Config\Adapter\Yaml,
     Phalcon\Db\Adapter\Pdo\Mysql,
-    Phalcon\Session\Adapter\Files as SessionAdapter,
     Phalcon\Logger\Adapter\File as FileLogger,
     Phalcon\Logger\Formatter\Line,
     Phalcon\Cache\Frontend\Data as FrontData,
@@ -62,12 +61,19 @@ $di->set('crypt', function () use ($di) {
 }, true);
 
 
-$di->set('session', function () {
+$di->set('session', function () use ($di) {
     ini_set('session.save_path', ROOT_DIR . '/storage/sessions/');
     ini_set('session.gc_maxlifetime', 86400 * 30);
     ini_set("session.cookie_lifetime", 86400 * 30);
     ini_set('session.name', 'SID');
-    $session = new SessionAdapter();
+    $session = new Phalcon\Session\Adapter\Files();
+    /*$session = new Phalcon\Session\Adapter\Redis([
+        "host"       => config('database.redis.host'),
+        "port"       => config('database.redis.port'),
+        "persistent" => false,
+        "lifetime"   => 86400 * 30,
+        "index"      => 0,
+    ]);*/
     $session->start();
     return $session;
 }, true);
