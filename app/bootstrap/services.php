@@ -4,7 +4,6 @@
 use Phalcon\DI\FactoryDefault,
     Phalcon\Crypt,
     Phalcon\Config,
-    Phalcon\Config\Adapter\Yaml,
     Phalcon\Db\Adapter\Pdo\Mysql,
     Phalcon\Logger\Adapter\File as FileLogger,
     Phalcon\Logger\Formatter\Line,
@@ -12,7 +11,6 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
     App\Providers,
-    Symfony\Component\Yaml\Yaml as SymfonyYaml,
     MongoDB\Client as MongoDBClient;
 
 
@@ -20,12 +18,7 @@ $di = new FactoryDefault();
 
 
 $di->set('config', function () {
-    if (function_exists('yaml_parse_file')) {
-        $config = new Yaml(CONFIG_DIR . "/app.yml");
-    }
-    else {
-        $config = new Config(SymfonyYaml::parse(file_get_contents(CONFIG_DIR . "/app.yml")));
-    }
+    $config = new Config(include CONFIG_DIR . "/app.php");
     if ($config['include']) {
         foreach ($config['include'] as $item) {
             $config[$item] = function () use ($item) {
@@ -56,7 +49,7 @@ $di->set('logger', function ($file = null) {
 
 $di->set('crypt', function () use ($di) {
     $crypt = new Crypt();
-    $crypt->setKey($di['config']->env->key);
+    $crypt->setKey($di['config']->key);
     return $crypt;
 }, true);
 

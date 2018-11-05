@@ -19,10 +19,8 @@
 
 
 ## How to use
-1. cd to /ROOT/app/config/
-2. copy .app.yml to app.yml  
-3. copy .database.php to database.php
-4. copy .providers.php to providers.php
+1. cd to /ROOT/  
+2. copy .env.example to .env  
 
 ## File path
 * /ROOT/app/config  -   config files  

@@ -22,7 +22,7 @@ $application->registerModules([
     'm1' => ['className' => 'App\Http\Module', 'path' => APP_DIR . '/http/Module.php']
 ]);
 
-if ($di['config']->env->disableView) {
+if (!empty($di['config']->disableView)) {
     $application->useImplicitView(false);
 }
 
