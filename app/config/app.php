@@ -18,12 +18,18 @@ return [
     'locale'   => 'en',
 
     // url address
-    'url'      => env('APP_URL', 'http://localhost'),
+    'url'      => env('APP_URL'),
 
     // key
     'key'      => env('APP_KEY'),
 
     // cipher
     'cipher'   => 'AES-256-CFB',
+
+    // include
+    'include'  => [
+        "database",
+        "providers"
+    ]
 
 ];

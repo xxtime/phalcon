@@ -20,7 +20,7 @@ class Locale extends Component
         if ($this->locale) {
             return $this->locale;
         }
-        return $this->config['env']['locale'];
+        return $this->config['locale'];
     }
 
 

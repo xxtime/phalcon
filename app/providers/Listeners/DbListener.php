@@ -21,7 +21,7 @@ class DbListener
     public function beforeQuery(Event $event, Pdo $pdo)
     {
         $di = DI::getDefault();
-        if ($di['config']['env']['logs']) {
+        if ($di['config']['debug']) {
             $di->get('logger', ['sql-' . date('Ymd') . '.log'])->log($pdo->getSQLStatement());
         }
         if (preg_match('/drop|alter/i', $pdo->getSQLStatement())) {
