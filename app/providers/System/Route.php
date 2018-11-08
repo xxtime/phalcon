@@ -66,7 +66,7 @@ class Route
         $this->_uri = $uri;
         $this->resource[$uri] = [
             'regular' => $idFormat ? $idFormat : $this->getIdFormat(),
-            'handle'  => $handle,
+            'handle'  => ucfirst($handle),
         ];
         return $this;
     }
