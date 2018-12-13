@@ -55,18 +55,24 @@ $di->set('crypt', function () use ($di) {
 
 
 $di->set('session', function () use ($di) {
-    ini_set('session.save_path', ROOT_DIR . '/storage/sessions/');
-    ini_set('session.gc_maxlifetime', 86400 * 30);
-    ini_set("session.cookie_lifetime", 86400 * 30);
-    ini_set('session.name', 'SID');
-    $session = new Phalcon\Session\Adapter\Files();
-    /*$session = new Phalcon\Session\Adapter\Redis([
-        "host"       => config('database.redis.host'),
-        "port"       => config('database.redis.port'),
-        "persistent" => false,
-        "lifetime"   => 86400 * 30,
-        "index"      => 0,
-    ]);*/
+    $lifetime = config("session.lifetime");
+    switch (config('session.driver')) {
+        case  "redis":
+            $session = new Phalcon\Session\Adapter\Redis([
+                "host"       => config('database.redis.host'),
+                "port"       => config('database.redis.port'),
+                "persistent" => false,
+                "lifetime"   => $lifetime,
+                "index"      => 0,
+            ]);
+        case  "file":
+        default:
+            ini_set('session.save_path', config('session.files'));
+            ini_set('session.gc_maxlifetime', $lifetime);
+            ini_set("session.cookie_lifetime", $lifetime);
+            ini_set('session.name', 'SID');
+            $session = new Phalcon\Session\Adapter\Files();
+    }
     $session->start();
     return $session;
 }, true);

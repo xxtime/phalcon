@@ -28,6 +28,7 @@ return [
 
     // include
     'include'  => [
+        "session",
         "database",
         "providers"
     ]
