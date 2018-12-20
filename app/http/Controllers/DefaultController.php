@@ -14,10 +14,4 @@ class DefaultController extends Controller
         $this->view->pick("default/index");
     }
 
-
-    public function notFoundAction()
-    {
-        $this->view->pick("default/notFound");
-    }
-
 }
