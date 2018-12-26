@@ -19,11 +19,9 @@ $di = new FactoryDefault();
 
 $di->set('config', function () {
     $config = new Config(include CONFIG_DIR . "/app.php");
-    if ($config['include']) {
-        foreach ($config['include'] as $item) {
-            $config[$item] = function () use ($item) {
-                return include CONFIG_DIR . '/' . $item . '.php';
-            };
+    if ($config->path("app.include")) {
+        foreach ($config->path("app.include") as $item) {
+            $config->merge(new Config(include CONFIG_DIR . '/' . $item . '.php'));
         }
     }
     return $config;
@@ -49,25 +47,25 @@ $di->set('logger', function ($file = null) {
 
 $di->set('crypt', function () use ($di) {
     $crypt = new Crypt();
-    $crypt->setKey($di['config']->key);
+    $crypt->setKey($di['config']->app->key);
     return $crypt;
 }, true);
 
 
 $di->set('session', function () use ($di) {
-    $lifetime = config("session.lifetime");
-    switch (config('session.driver')) {
+    $lifetime = $di["config"]->path("session.lifetime");
+    switch ($di["config"]->path("session.driver")) {
         case  "redis":
             $session = new Phalcon\Session\Adapter\Redis([
-                "host"       => config('database.redis.host'),
-                "port"       => config('database.redis.port'),
+                "host"       => $di["config"]->path("database.redis.host"),
+                "port"       => $di["config"]->path("database.redis.port"),
                 "persistent" => false,
                 "lifetime"   => $lifetime,
                 "index"      => 0,
             ]);
         case  "file":
         default:
-            ini_set('session.save_path', config('session.files'));
+            ini_set('session.save_path', $di["config"]->path('session.files'));
             ini_set('session.gc_maxlifetime', $lifetime);
             ini_set("session.cookie_lifetime", $lifetime);
             ini_set('session.name', 'SID');
@@ -80,11 +78,11 @@ $di->set('session', function () use ($di) {
 
 $di->set('modelsCache', function () use ($di) {
     $frontCache = new FrontData(["lifetime" => 60]);
-    if (isset($di['config']->cache)) {
+    if ($di['config']->path("cache.driver") == 'redis') {
         return new RedisCache($frontCache, [
-            'host'   => $di['config']->cache->host,
-            'port'   => $di['config']->cache->port,
-            'index'  => $di['config']->cache->db,
+            "host"   => $di["config"]->path("cache.host"),
+            "port"   => $di["config"]->path("cache.port"),
+            'index'  => $di["config"]->path("cache.db"),
             'prefix' => 'cache|',
         ]);
     }
@@ -94,20 +92,20 @@ $di->set('modelsCache', function () use ($di) {
 
 $di->set('cache', function () use ($di) {
     $redis = new Redis();
-    $redis->connect($di['config']->cache->host, $di['config']->cache->port);
-    $redis->select($di['config']->cache->db);
+    $redis->connect($di["config"]->path("cache.host"), $di["config"]->path("cache.port"));
+    $redis->select($di["config"]->path("cache.db"));
     return $redis;
 }, true);
 
 
 $di->set('db', function () use ($di) {
     $connection = new Mysql([
-        'host'     => config('database.mysql.host'),
-        'port'     => config('database.mysql.port'),
-        'username' => config('database.mysql.user'),
-        'password' => config('database.mysql.pass'),
-        'dbname'   => config('database.mysql.db'),
-        'charset'  => config('database.mysql.charset')
+        'host'     => $di["config"]->path("database.mysql.host"),
+        'port'     => $di["config"]->path("database.mysql.port"),
+        'username' => $di["config"]->path("database.mysql.user"),
+        'password' => $di["config"]->path("database.mysql.pass"),
+        'dbname'   => $di["config"]->path("database.mysql.db"),
+        'charset'  => $di["config"]->path("database.mysql.charset"),
     ]);
     $connection->setEventsManager($di['eventsManager']);
     return $connection;
@@ -116,18 +114,18 @@ $di->set('db', function () use ($di) {
 
 $di->set('redis', function () use ($di) {
     $redis = new Redis();
-    $redis->connect(config('database.redis.host'), config('database.redis.port'));
-    $redis->select(config('database.redis.db'));
+    $redis->connect($di["config"]->path("database.redis.host"), $di["config"]->path("database.redis.port"));
+    $redis->select($di["config"]->path("database.redis.db"));
     return $redis;
 }, true);
 
 
 $di->set('mongodb', function () use ($di) {
     return new MongoDBClient(
-        "mongodb://" . config('database.mongodb.host') . ':' . config('database.mongodb.port'),
+        "mongodb://" . $di["config"]->path('database.mongodb.host') . ':' . $di["config"]->path('database.mongodb.port'),
         array_filter([
-            'username'   => config('database.mongodb.user'),
-            'password'   => config('database.mongodb.pass'),
-            'authSource' => config('database.mongodb.db')
+            'username'   => $di["config"]->path('database.mongodb.user'),
+            'password'   => $di["config"]->path('database.mongodb.pass'),
+            'authSource' => $di["config"]->path('database.mongodb.db')
         ]));
 }, true);

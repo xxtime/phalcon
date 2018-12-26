@@ -13,7 +13,7 @@ $loader->registerNamespaces(array(
 
 require ROOT_DIR . '/vendor/autoload.php';
 require APP_DIR . '/providers/helpers.php';
-require APP_DIR . "/bootstrap/services.php";
+require APP_DIR . "/bootstrap/service.php";
 require APP_DIR . "/bootstrap/setting.php";
 
 $application = new Application($di);
@@ -22,7 +22,7 @@ $application->registerModules([
     'm1' => ['className' => 'App\Http\Module', 'path' => APP_DIR . '/http/Module.php']
 ]);
 
-if (!empty($di['config']->disableView)) {
+if ($di['config']->path('app.disableView')) {
     $application->useImplicitView(false);
 }
 

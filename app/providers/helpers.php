@@ -54,16 +54,5 @@ if (!function_exists('loadEnv')) {
 
 function config($string)
 {
-    $parts = explode('.', $string);
-    $file = array_shift($parts);
-    if ($GLOBALS['di']['config'][$file] instanceof Closure) {
-        $result = $GLOBALS['di']['config'][$file]();
-    }
-    else {
-        $result = $GLOBALS['di']['config'][$file];
-    }
-    foreach ($parts as $v) {
-        $result = $result[$v];
-    }
-    return $result;
+    return $GLOBALS['di']['config']->path($string);
 }

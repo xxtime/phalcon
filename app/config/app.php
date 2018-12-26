@@ -1,36 +1,103 @@
 <?php
 
 return [
+    "app" => [
 
-    // App Name
-    'name'     => env('APP_NAME', 'XT'),
+        /*
+        |--------------------------------------------------------------------------
+        | App Name
+        |--------------------------------------------------------------------------
+        |
+        | Default is XT
+        |
+        */
+        'name'     => env('APP_NAME', 'XT'),
 
-    // dev production
-    'env'      => env('APP_ENV', 'production'),
+        /*
+        |--------------------------------------------------------------------------
+        | Application Environment
+        |--------------------------------------------------------------------------
+        |
+        | This value determines the "environment" your application is currently
+        | running in. This may determine how you prefer to configure various
+        | services your application utilizes. Set this in your ".env" file.
+        |
+        */
+        'env'      => env('APP_ENV', 'production'),
 
-    // true | false
-    'debug'    => env('APP_DEBUG', false),
+        /*
+        |--------------------------------------------------------------------------
+        | Application Debug Mode
+        |--------------------------------------------------------------------------
+        |
+        | When your application is in debug mode, detailed error messages with
+        | stack traces will be shown on every error that occurs within your
+        | application. If disabled, a simple generic error page is shown.
+        |
+        */
+        'debug'    => env('APP_DEBUG', false),
 
-    // timezone, default UTC
-    "timezone" => env("APP_TIMEZONE", "UTC"),
+        /*
+        |--------------------------------------------------------------------------
+        | Timezone
+        |--------------------------------------------------------------------------
+        |
+        | Default 'UTC'. EXP: 'PRC', 'Asia/Shanghai'
+        |
+        */
+        "timezone" => env("APP_TIMEZONE", "UTC"),
 
-    // locale
-    'locale'   => 'en',
+        /*
+        |--------------------------------------------------------------------------
+        | Language
+        |--------------------------------------------------------------------------
+        |
+        | Default 'en'
+        |
+        */
+        'locale'   => 'en',
 
-    // url address
-    'url'      => env('APP_URL'),
+        /*
+        |--------------------------------------------------------------------------
+        | URL
+        |--------------------------------------------------------------------------
+        |
+        | http://localhost
+        |
+        */
+        'url'      => env('APP_URL'),
 
-    // key
-    'key'      => env('APP_KEY'),
+        /*
+        |--------------------------------------------------------------------------
+        | App Key
+        |--------------------------------------------------------------------------
+        |
+        */
+        'key'      => env('APP_KEY'),
 
-    // cipher
-    'cipher'   => 'AES-256-CFB',
+        /*
+        |--------------------------------------------------------------------------
+        | App Key
+        |--------------------------------------------------------------------------
+        |
+        | Default 'AES-256-CFB'
+        |
+        */
+        'cipher'   => 'AES-256-CFB',
 
-    // include
-    'include'  => [
-        "session",
-        "database",
-        "providers"
+        /*
+        |--------------------------------------------------------------------------
+        | Include files
+        |--------------------------------------------------------------------------
+        |
+        | Put files in config dir
+        |
+        */
+        'include'  => [
+            "session",
+            "database",
+            "providers"
+        ]
+
     ]
-
 ];

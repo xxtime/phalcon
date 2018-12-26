@@ -2,14 +2,16 @@
 
 
 return [
+    "providers" => [
 
-    'middleware' => [
-        'finish' => 'App\Providers\Middleware\FinishMiddleware'
-    ],
+        'middleware' => [
+            'finish' => 'App\Providers\Middleware\FinishMiddleware'
+        ],
 
-    'listeners' => [
-        'application' => 'App\Providers\Listeners\ApplicationListener',
-        'db'          => 'App\Providers\Listeners\DbListener',
+        'listeners' => [
+            'application' => 'App\Providers\Listeners\ApplicationListener',
+            'db'          => 'App\Providers\Listeners\DbListener',
+        ]
+
     ]
-
 ];
