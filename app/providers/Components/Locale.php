@@ -20,7 +20,7 @@ class Locale extends Component
         if ($this->locale) {
             return $this->locale;
         }
-        return $this->config['locale'];
+        return $this->config->app->locale;
     }
 
 
@@ -53,7 +53,7 @@ class Locale extends Component
             $messages = include $path;
         }
         else {
-            $messages = include APP_DIR . '/locale/' . $this->config['env']['locale'] . DIRECTORY_SEPARATOR . $file . '.php';
+            $messages = include APP_DIR . '/locale/' . $this->config->app->locale . DIRECTORY_SEPARATOR . $file . '.php';
         }
 
         return new NativeArray(['content' => $messages]);
