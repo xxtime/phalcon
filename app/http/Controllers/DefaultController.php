@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use Phalcon\Mvc\Controller;
 
 /**
- * @property \App\Providers\Components\Locale $locale
+ * @property \App\Providers\System\Locale $locale
  */
 class DefaultController extends Controller
 {

@@ -16,6 +16,9 @@ use App\Providers\Components\Queue;
 use Endroid\QrCode\QrCode;
 use PHPGangsta_GoogleAuthenticator;
 
+/**
+ * @property \App\Providers\System\Locale $locale
+ */
 class DemoController extends Controller
 {
 

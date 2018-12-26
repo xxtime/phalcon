@@ -29,7 +29,7 @@ $di->set('config', function () {
 
 
 $di->set('locale', function () {
-    return new Providers\Components\Locale();
+    return new Providers\System\Locale();
 }, true);
 
 

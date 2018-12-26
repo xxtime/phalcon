@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers\Components;
+namespace App\Providers\System;
 
 
 use Phalcon\Mvc\User\Component;

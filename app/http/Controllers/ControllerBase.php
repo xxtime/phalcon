@@ -8,7 +8,7 @@ use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
 
 /**
- * @property \App\Providers\Components\Locale $locale
+ * @property \App\Providers\System\Locale $locale
  */
 class ControllerBase extends Controller
 {
