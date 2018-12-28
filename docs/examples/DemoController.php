@@ -7,7 +7,6 @@
 namespace App\Http\Controllers;
 
 
-use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Filter;
 use App\Http\Models\DemoModel;

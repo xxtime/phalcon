@@ -4,9 +4,12 @@
 namespace App\Http\Controllers;
 
 
-use Phalcon\Mvc\Controller;
+use Phalcon\Mvc\Controller as BaseController;
 
-class ExceptionController extends Controller
+/**
+ * @property \App\Providers\System\Locale $locale
+ */
+class ExceptionController extends BaseController
 {
 
     public function statusNotFoundAction()

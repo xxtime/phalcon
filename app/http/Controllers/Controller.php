@@ -4,13 +4,13 @@
 namespace App\Http\Controllers;
 
 
-use Phalcon\Mvc\Controller;
+use Phalcon\Mvc\Controller as BaseController;
 use Phalcon\Mvc\Dispatcher;
 
 /**
  * @property \App\Providers\System\Locale $locale
  */
-class ControllerBase extends Controller
+class Controller extends BaseController
 {
 
     public function beforeExecuteRoute(Dispatcher $dispatcher)

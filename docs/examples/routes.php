@@ -11,7 +11,7 @@ use Phalcon\Mvc\Router;
 $router = new Router(false);
 $router->removeExtraSlashes(true);
 
-$router->notFound(['controller' => 'default', 'action' => 'notFound']);
+$router->notFound(['controller' => 'exception', 'action' => 'statusNotFound']);
 $router->add('/', ['controller' => 'default', 'action' => 'index']);
 
 $router->add('/:controller', ['controller' => 1]);
