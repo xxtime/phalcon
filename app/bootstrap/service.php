@@ -34,7 +34,7 @@ $di->set('locale', function () {
 
 
 $di->set('router', function () {
-    return require CONFIG_DIR . '/routes.php';
+    return require APP_DIR . '/routes.php';
 }, true);
 
 
