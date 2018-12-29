@@ -21,8 +21,7 @@ class Module implements ModuleDefinitionInterface
         /*
         $loader = new Loader();
         $loader->registerNamespaces([
-            'App\Http\Controllers' => '../app/http/Controllers/',
-            'App\Http\Models'      => '../app/http/Models/',
+            'App\Http' => APP_DIR . '/http',
         ]);
         $loader->register();
         */
@@ -44,7 +43,7 @@ class Module implements ModuleDefinitionInterface
 
         $di->set('view', function () use ($di) {
             $view = new View();
-            $view->setViewsDir('../app/http/Views/');
+            $view->setViewsDir(APP_DIR . '/http/Views/');
             $view->registerEngines([
                 '.phtml' => function ($view, $di) {
                     $volt = new Volt($view, $di);
