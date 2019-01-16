@@ -13,7 +13,7 @@ use Phalcon\Mvc\Dispatcher;
  * @property \Phalcon\Config $config
  * @property \Redis $redis
  * @property \MongoDB\Client $mongodb
- * @property \App\Providers\System\Locale $locale
+ * @property \App\Providers\System\Lang $lang
  */
 class Controller extends BaseController
 {

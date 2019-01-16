@@ -28,8 +28,8 @@ $di->set('config', function () {
 }, true);
 
 
-$di->set('locale', function () {
-    return new Providers\System\Locale();
+$di->set('lang', function () {
+    return new Providers\System\Lang();
 }, true);
 
 

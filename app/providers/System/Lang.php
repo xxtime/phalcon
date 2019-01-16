@@ -6,27 +6,27 @@ namespace App\Providers\System;
 use Phalcon\Mvc\User\Component;
 use Phalcon\Translate\Adapter\NativeArray;
 
-class Locale extends Component
+class Lang extends Component
 {
 
-    private $locale = null;
+    private $lang = null;
 
 
     private $translator = null;
 
 
-    public function getLocale()
+    public function getLang()
     {
-        if ($this->locale) {
-            return $this->locale;
+        if ($this->lang) {
+            return $this->lang;
         }
-        return $this->config->app->locale;
+        return $this->config->app->lang;
     }
 
 
-    public function setLocale($locale = 'en_US')
+    public function setLang($lang = 'en_US')
     {
-        $this->locale = $locale;
+        $this->lang = $lang;
     }
 
 
@@ -47,13 +47,13 @@ class Locale extends Component
 
     private function getTranslator($file = 'message')
     {
-        $path = APP_DIR . '/locale/' . $this->getLocale() . DIRECTORY_SEPARATOR . $file . '.php';
+        $path = ROOT_DIR . '/resources/lang/' . $this->getLang() . DIRECTORY_SEPARATOR . $file . '.php';
 
         if (file_exists($path)) {
             $messages = include $path;
         }
         else {
-            $messages = include APP_DIR . '/locale/' . $this->config->app->locale . DIRECTORY_SEPARATOR . $file . '.php';
+            $messages = include ROOT_DIR . '/resources/lang/' . $this->config->app->lang . DIRECTORY_SEPARATOR . $file . '.php';
         }
 
         return new NativeArray(['content' => $messages]);

@@ -16,7 +16,7 @@ use Endroid\QrCode\QrCode;
 use PHPGangsta_GoogleAuthenticator;
 
 /**
- * @property \App\Providers\System\Locale $locale
+ * @property \App\Providers\System\Lang $lang
  */
 class DemoController extends Controller
 {
@@ -231,9 +231,9 @@ class DemoController extends Controller
     public function translatorAction()
     {
         // method one
-        $this->locale->t('hi', ['name' => 'Joe Chu']);
+        $this->lang->t('hi', ['name' => 'Joe Chu']);
         // method two
-        $this->locale->_('hi', ['name' => 'Joe Chu']);
+        $this->lang->_('hi', ['name' => 'Joe Chu']);
 
         // also can write like this
         // $this->view->text = $this->locale;           // in the controller

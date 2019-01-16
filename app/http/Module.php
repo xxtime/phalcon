@@ -43,7 +43,7 @@ class Module implements ModuleDefinitionInterface
 
         $di->set('view', function () use ($di) {
             $view = new View();
-            $view->setViewsDir(APP_DIR . '/http/Views/');
+            $view->setViewsDir(ROOT_DIR . '/resources/views/');
             $view->registerEngines([
                 '.phtml' => function ($view, $di) {
                     $volt = new Volt($view, $di);
