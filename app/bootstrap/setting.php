@@ -4,7 +4,7 @@
 use Phalcon\Logger;
 
 
-loadEnv(ROOT_DIR . '/.env');
+loadEnv();
 
 ini_set("date.timezone", $di['config']->app->timezone);
 

@@ -39,8 +39,14 @@ if (!function_exists('env')) {
 }
 
 if (!function_exists('loadEnv')) {
-    function loadEnv($path = "")
+    function loadEnv()
     {
+        if (file_exists(ROOT_DIR . '/.env')) {
+            $path = ROOT_DIR . '/.env';
+        }
+        else {
+            return false;
+        }
         $autodetect = ini_get('auto_detect_line_endings');
         ini_set('auto_detect_line_endings', '1');
         $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
