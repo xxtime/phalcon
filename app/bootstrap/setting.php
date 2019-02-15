@@ -16,7 +16,6 @@ switch ($di['config']->app->env != 'production') {
         error_reporting(E_ALL);
         break;
     default:
-        header_remove('X-Powered-By');
         error_reporting(0);
 };
 
