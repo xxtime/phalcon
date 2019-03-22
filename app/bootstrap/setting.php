@@ -20,10 +20,12 @@ switch ($di['config']->app->env != 'production') {
 };
 
 if ($di['config']->app->debug) {
-    $separator = strpos($_SERVER['REQUEST_URI'], '?') ? '&' : '?';
-    $log = $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'];
-    $log .= file_get_contents("php://input") ? $separator . file_get_contents("php://input") : '';
-    $di->get('logger', [date('Ym')])->log($log, Logger::INFO);
+    $logs = $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'] . ' ' . $_SERVER['SERVER_PROTOCOL'] . "\n";
+    foreach (getallheaders() as $key => $value) {
+        $logs .= $key . ': ' . $value . "\n";
+    }
+    $logs .= "\n" . file_get_contents("php://input");
+    $di->get('logger', [date('Ym')])->log($logs, Logger::INFO);
 }
 
 if (count($di['config']->path('providers.listeners')) > 0) {
