@@ -25,7 +25,7 @@ if ($di['config']->app->debug) {
         $logs .= $key . ': ' . $value . "\n";
     }
     $logs .= "\n" . file_get_contents("php://input");
-    $di->get('logger', [date('Ym')])->log($logs, Logger::INFO);
+    $di->get('logger', [date('Ymd')])->log($logs, Logger::INFO);
 }
 
 if (count($di['config']->path('providers.listeners')) > 0) {
