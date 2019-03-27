@@ -5,6 +5,7 @@ package-lock.json
 
 # compiled output
 /dist
+/build
 /.tmp
 
 # System Files

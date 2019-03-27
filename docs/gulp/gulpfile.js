@@ -1,7 +1,8 @@
 const folder = {
-  src: "resources", // source files
-  dist: "dist", // build files
-  dist_assets: "dist/assets" //build assets files
+  tmp: ".tmp/",
+  src: "resources/",
+  dist: "dist/",
+  dist_assets: "dist/assets/"
 };
 
 const { src, dest, watch, series, parallel, lastRun } = require('gulp');
@@ -25,7 +26,7 @@ const isTest = process.env.NODE_ENV === 'test';
 const isDev = !isProd && !isTest;
 
 function styles() {
-  return src(folder.src + '/assets/styles/*.scss')
+  return src(folder.src + 'assets/styles/*.scss')
     .pipe($.plumber())
     .pipe($.if(!isProd, $.sourcemaps.init()))
     .pipe($.sass.sync({
@@ -37,17 +38,17 @@ function styles() {
       autoprefixer()
     ]))
     .pipe($.if(!isProd, $.sourcemaps.write()))
-    .pipe(dest('.tmp/assets/styles'))
+    .pipe(dest(folder.tmp + 'assets/styles'))
     .pipe(server.reload({stream: true}));
 };
 
 function scripts() {
-  return src(folder.src + '/assets/scripts/**/*.js')
+  return src(folder.src + 'assets/scripts/**/*.js')
     .pipe($.plumber())
     .pipe($.if(!isProd, $.sourcemaps.init()))
     .pipe($.babel())
     .pipe($.if(!isProd, $.sourcemaps.write('.')))
-    .pipe(dest('.tmp/assets/scripts'))
+    .pipe(dest(folder.tmp + 'assets/scripts'))
     .pipe(server.reload({stream: true}));
 };
 
@@ -59,14 +60,14 @@ async function modernizr() {
     })
   })
   const createDir = () => new Promise((resolve, reject) => {
-    mkdirp(`${__dirname}/.tmp/assets/scripts`, err => {
+    mkdirp(`${__dirname}/${folder.tmp}assets/scripts`, err => {
       if (err) reject(err);
       resolve();
     })
   });
   const generateScript = config => new Promise((resolve, reject) => {
     Modernizr.build(config, content => {
-      fs.writeFile(`${__dirname}/.tmp/assets/scripts/modernizr.js`, content, err => {
+      fs.writeFile(`${__dirname}/${folder.tmp}assets/scripts/modernizr.js`, content, err => {
         if (err) reject(err);
         resolve(content);
       });
@@ -88,8 +89,8 @@ const lintBase = files => {
     .pipe($.if(!server.active, $.eslint.failAfterError()));
 }
 function lint() {
-  return lintBase(folder.src + '/assets/scripts/**/*.js')
-    .pipe(dest(folder.src + '/assets/scripts'));
+  return lintBase(folder.src + 'assets/scripts/**/*.js')
+    .pipe(dest(folder.src + 'assets/scripts'));
 };
 function lintTest() {
   return lintBase('test/spec/**/*.js')
@@ -97,8 +98,8 @@ function lintTest() {
 };
 
 function html() {
-  return src(folder.src + '/*.html')
-    .pipe($.useref({searchPath: ['.tmp', folder.src, '.']}))
+  return src(folder.src + '*.html')
+    .pipe($.useref({searchPath: [folder.tmp, folder.src, '.']}))
     .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
     .pipe($.if(/\.css$/, $.postcss([cssnano({safe: true, autoprefixer: false})])))
     .pipe($.if(/\.html$/, $.htmlmin({
@@ -115,27 +116,29 @@ function html() {
 }
 
 function images() {
-  return src(folder.src + '/assets/images/**/*', { since: lastRun(images) })
+  return src(folder.src + 'assets/images/**/*', { since: lastRun(images) })
     .pipe($.imagemin())
-    .pipe(dest(folder.dist_assets + '/images'));
+    .pipe(dest(folder.dist_assets + 'images'));
 };
 
 function fonts() {
-  return src(folder.src + '/assets/fonts/**/*.{eot,svg,ttf,woff,woff2}')
-    .pipe($.if(!isProd, dest('.tmp/assets/fonts'), dest(folder.dist_assets + '/fonts')));
+  return src(folder.src + 'assets/fonts/**/*.{eot,svg,ttf,woff,woff2}')
+    .pipe($.if(!isProd, dest(folder.tmp + 'assets/fonts'), dest(folder.dist_assets + 'fonts')));
 };
 
 function extras() {
   return src([
-    folder.src + '/*',
-    '!' + folder.src + '/*.html'
+    folder.src + '*',
+    '!' + folder.src + 'lang',
+    '!' + folder.src + 'views',
+    '!' + folder.src + '*.html'
   ], {
     dot: true
   }).pipe(dest('dist'));
 };
 
 function clean() {
-  return del(['.tmp', 'dist'])
+  return del([folder.tmp, 'dist'])
 }
 
 function measureSize() {
@@ -160,7 +163,7 @@ function startAppServer() {
     notify: false,
     port,
     server: {
-      baseDir: ['.tmp', folder.src],
+      baseDir: [folder.tmp, folder.src],
       routes: {
         '/node_modules': 'node_modules'
       }
@@ -168,15 +171,15 @@ function startAppServer() {
   });
 
   watch([
-    folder.src + '/*.html',
-    folder.src + '/assets/images/**/*',
-    '.tmp/assets/fonts/**/*'
+    folder.src + '*.html',
+    folder.src + 'assets/images/**/*',
+    folder.tmp + 'assets/fonts/**/*'
   ]).on('change', server.reload);
 
-  watch(folder.src + '/assets/styles/**/*.scss', styles);
-  watch(folder.src + '/assets/scripts/**/*.js', scripts);
+  watch(folder.src + 'assets/styles/**/*.scss', styles);
+  watch(folder.src + 'assets/scripts/**/*.js', scripts);
   watch('modernizr.json', modernizr);
-  watch(folder.src + '/assets/fonts/**/*', fonts);
+  watch(folder.src + 'assets/fonts/**/*', fonts);
 }
 
 function startTestServer() {
@@ -187,13 +190,13 @@ function startTestServer() {
     server: {
       baseDir: 'test',
       routes: {
-        '/scripts': '.tmp/assets/scripts',
+        '/scripts': folder.tmp + 'assets/scripts',
         '/node_modules': 'node_modules'
       }
     }
   });
 
-  watch(folder.src + '/assets/scripts/**/*.js', scripts);
+  watch(folder.src + 'assets/scripts/**/*.js', scripts);
   watch(['test/spec/**/*.js', 'test/index.html']).on('change', server.reload);
   watch('test/spec/**/*.js', lintTest);
 }
