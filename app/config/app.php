@@ -96,7 +96,8 @@ return [
         'include'  => [
             "session",
             "database",
-            "providers"
+            "providers",
+            "cache"
         ]
 
     ]

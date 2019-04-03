@@ -11,6 +11,7 @@ use Phalcon\Mvc\Dispatcher;
  * Class Controller
  * @package App\Http\Controllers
  * @property \Phalcon\Config $config
+ * @property \Redis $cache
  * @property \Redis $redis
  * @property \MongoDB\Client $mongodb
  * @property \App\Providers\System\Lang $lang
