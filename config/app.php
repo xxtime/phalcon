@@ -97,15 +97,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | System Listeners
+    | Events Listeners
     |--------------------------------------------------------------------------
     |
-    | Listeners list
+    | Events Listener
     |
     */
     'listeners' => [
         'dispatch'    => 'App\Providers\Listeners\DispatchListener',
         'application' => 'App\Providers\Listeners\ApplicationListener',
+        'router'      => 'App\Providers\Listeners\RouterListener',
         'db'          => 'App\Providers\Listeners\DbListener',
     ],
 

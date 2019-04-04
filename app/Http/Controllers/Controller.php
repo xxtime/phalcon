@@ -14,7 +14,7 @@ use Phalcon\Mvc\Dispatcher;
  * @property \Redis $cache
  * @property \Redis $redis
  * @property \MongoDB\Client $mongodb
- * @property \App\Providers\System\Lang $lang
+ * @property \App\System\Lang $lang
  */
 class Controller extends BaseController
 {

@@ -2,12 +2,12 @@
 
 /**
  * USAGE:
- * $r = new Providers\System\Route($router);
+ * $r = new \App\System\Route($router);
  * $r->addResource('/product', 'V1\Product','{id:[a-z0-9]{1,24}}')->only('show');
  * $r->addResource('/news', 'V1\News')->except('destroy');
  */
 
-namespace App\Providers\System;
+namespace App\System;
 
 
 use Phalcon\Mvc\Router\Group;

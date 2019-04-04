@@ -13,8 +13,8 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\View,
     Phalcon\Mvc\View\Engine\Volt,
-    App\Providers,
-    MongoDB\Client as MongoDBClient;
+    MongoDB\Client as MongoDBClient,
+    App\System;
 
 
 $di = new FactoryDefault();
@@ -32,12 +32,14 @@ $di->set('config', function () {
 
 
 $di->set('lang', function () {
-    return new Providers\System\Lang();
+    return new System\Lang();
 }, true);
 
 
-$di->set('router', function () {
-    return require ROOT_DIR . '/routes/web.php';
+$di->set('router', function () use ($di) {
+    $router = require ROOT_DIR . '/routes/web.php';
+    $router->setEventsManager($di->get('eventsManager'));
+    return $router;
 }, true);
 
 

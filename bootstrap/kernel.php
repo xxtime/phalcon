@@ -14,6 +14,10 @@ use Phalcon\Loader;
 use Phalcon\Logger;
 use Phalcon\Mvc\Application;
 
+/**
+ * Class Framework
+ * @property \Phalcon\Di|\Phalcon\DiInterface $di
+ */
 class Framework
 {
 
@@ -82,6 +86,9 @@ class Framework
         /*
         | Setting Listeners
         |------------------------------------------------------------------
+        |
+        | config/app.php listeners
+        |
         */
         foreach ($this->di['config']->path('app.listeners') as $name => $listener) {
             $this->di['eventsManager']->attach($name, new $listener);
