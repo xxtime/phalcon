@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @name    /ROOT/app/routes.php
+ * @name    /ROOT/routes/web.php
  * @see     /ROOT/docs/examples/routes.php
  * @link    https://docs.phalconphp.com/zh/3.3/routing
  *

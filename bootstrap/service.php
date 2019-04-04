@@ -10,6 +10,9 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
+    Phalcon\Mvc\Dispatcher,
+    Phalcon\Mvc\View,
+    Phalcon\Mvc\View\Engine\Volt,
     App\Providers,
     MongoDB\Client as MongoDBClient;
 
@@ -18,12 +21,12 @@ $di = new FactoryDefault();
 
 
 $di->set('config', function () {
-    $config = new Config(include CONFIG_DIR . "/app.php");
-    if ($config->path("app.include")) {
-        foreach ($config->path("app.include") as $item) {
-            $config->merge(new Config(include CONFIG_DIR . '/' . $item . '.php'));
-        }
+    $config = new Config(['app' => include CONFIG_DIR . "/app.php"]);
+    $c = [];
+    foreach ($config->path("app.config") as $name => $item) {
+        $c[$name] = include $item;
     }
+    $config->merge(new Config($c));
     return $config;
 }, true);
 
@@ -34,7 +37,7 @@ $di->set('lang', function () {
 
 
 $di->set('router', function () {
-    return require APP_DIR . '/routes.php';
+    return require ROOT_DIR . '/routes/web.php';
 }, true);
 
 
@@ -73,6 +76,28 @@ $di->set('session', function () use ($di) {
     }
     $session->start();
     return $session;
+}, true);
+
+
+$di->set('dispatcher', function () use ($di) {
+    $dispatcher = new Dispatcher();
+    $dispatcher->setDefaultNamespace('App\Http\Controllers');
+    $dispatcher->setEventsManager($di['eventsManager']);
+    return $dispatcher;
+}, true);
+
+
+$di->set('view', function () use ($di) {
+    $view = new View();
+    $view->setViewsDir(ROOT_DIR . '/resources/views/');
+    $view->registerEngines([
+        '.phtml' => function ($view, $di) {
+            $volt = new Volt($view, $di);
+            $volt->setOptions(['compiledPath' => ROOT_DIR . '/storage/cache/']);
+            return $volt;
+        }
+    ]);
+    return $view;
 }, true);
 
 

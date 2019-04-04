@@ -23,7 +23,7 @@
 2. copy .env.example to .env  
 
 ## File path
-* /app/config  -   config files  
+* /config  -   config files  
 * /docs        -   documents files  
 
 

@@ -28,8 +28,8 @@ if ($di['config']->app->debug) {
     $di->get('logger', [date('Ymd')])->log($logs, Logger::INFO);
 }
 
-if (count($di['config']->path('providers.listeners')) > 0) {
-    foreach ($di['config']->path('providers.listeners') as $name => $listener) {
+if (count($di['config']->path('app.listeners')) > 0) {
+    foreach ($di['config']->path('app.listeners') as $name => $listener) {
         $di['eventsManager']->attach($name, new $listener);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @name    /ROOT/app/routes.php
+ * @name    /ROOT/routes/web.php
  * @see     /ROOT/docs/examples/routes.php
  * @link    https://docs.phalconphp.com/zh/3.3/routing
  *
@@ -21,7 +21,6 @@ $router->removeExtraSlashes(true);
 $router->notFound(['controller' => 'exception', 'action' => 'statusNotFound']);
 $router->add('/', ['controller' => 'default', 'action' => 'index']);
 
-$router->setDefaultModule('http');
 $router->setDefaultNamespace('App\Http\Controllers');
 $router->setDefaultController('index');
 $router->setDefaultAction('index');
