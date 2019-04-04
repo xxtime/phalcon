@@ -58,9 +58,11 @@ if (!function_exists('loadEnv')) {
     }
 }
 
-function config($string)
-{
-    return $GLOBALS['di']['config']->path($string);
+if (!function_exists('config')) {
+    function config($string)
+    {
+        return $GLOBALS['di']['config']->path($string);
+    }
 }
 
 if (!function_exists('getallheaders')) {

@@ -154,3 +154,6 @@ $di->set('mongodb', function () use ($di) {
             'authSource' => $di["config"]->path('database.mongodb.db')
         ]));
 }, true);
+
+
+return $di;
