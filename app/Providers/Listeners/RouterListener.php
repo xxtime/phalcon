@@ -1,6 +1,6 @@
 <?php
 /**
- * @link https://docs.phalconphp.com/3.4/en/routing
+ * @link https://docs.phalconphp.com/3.4/zh-cn/routing
  *
  * public function beforeCheckRoutes()
  * public function beforeCheckRoute()
@@ -14,10 +14,11 @@ namespace App\Providers\Listeners;
 
 
 use App\Http\Middleware\Authenticate;
+use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Router;
 
-class RouterListener
+class RouterListener extends Plugin
 {
 
     public function matchedRoute(Event $event, Router $handle)

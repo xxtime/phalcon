@@ -3,8 +3,8 @@
 /**
  * Class DispatchListener
  * @package App\Providers\Listeners
- * @link https://docs.phalconphp.com/zh/3.3/events#list
- * @link https://docs.phalconphp.com/zh/3.3/dispatcher#dispatch-loop-events
+ * @link https://docs.phalconphp.com/3.4/zh-cn/events#list
+ * @link https://docs.phalconphp.com/3.4/zh-cn/dispatcher#dispatch-loop-events
  *
  * public function beforeDispatchLoop()
  * public function beforeDispatch()
@@ -17,15 +17,18 @@
  * public function beforeForward()
  * public function beforeNotFoundAction()
  *
+ * Not Found In docs /3.4/zh-cn/dispatcher#dispatch-loop-events
+ * afterInitialize beforeForward
  */
 
 namespace App\Providers\Listeners;
 
 
+use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
 
-class DispatchListener
+class DispatchListener extends Plugin
 {
 
     // public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher) {}

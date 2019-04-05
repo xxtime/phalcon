@@ -3,7 +3,7 @@
 /**
  * Class ApplicationListener
  * @package App\Providers\Listeners
- * @link https://docs.phalconphp.com/zh/3.3/events#list
+ * @link https://docs.phalconphp.com/3.4/zh-cn/events#list
  *
  * public function boot(Event $event, Application $app)
  * public function beforeStartModule(Event $event, Application $app)
@@ -17,10 +17,11 @@
 namespace App\Providers\Listeners;
 
 
+use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Application;
 
-class ApplicationListener
+class ApplicationListener extends Plugin
 {
 
 

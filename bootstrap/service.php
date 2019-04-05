@@ -6,7 +6,6 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Config,
     Phalcon\Db\Adapter\Pdo\Mysql,
     Phalcon\Logger\Adapter\File as FileLogger,
-    Phalcon\Logger\Formatter\Line,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
@@ -45,7 +44,6 @@ $di->set('router', function () use ($di) {
 
 $di->set('logger', function ($file = null) {
     $logger = new FileLogger(ROOT_DIR . '/storage/logs/' . ($file ? $file : date('Ymd')));
-    $logger->setFormatter(new Line("[%date%][%type%] %message%", 'Y-m-d H:i:s O'));
     return $logger;
 }, false);
 
