@@ -10,7 +10,7 @@ namespace App\System;
 class Middleware
 {
 
-    private $di;
+    protected $di;
 
     public function __construct($di)
     {
