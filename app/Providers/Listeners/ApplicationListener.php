@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class ApplicationListener
  * @package App\Providers\Listeners
@@ -15,7 +14,6 @@
  */
 
 namespace App\Providers\Listeners;
-
 
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;

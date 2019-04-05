@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-
+use App\System\Middleware;
 use Phalcon\Http\RequestInterface;
 
-class Authenticate
+class Authenticate extends Middleware
 {
 
     public $except = [

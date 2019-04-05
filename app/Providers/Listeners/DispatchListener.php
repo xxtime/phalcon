@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class DispatchListener
  * @package App\Providers\Listeners

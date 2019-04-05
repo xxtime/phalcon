@@ -12,19 +12,24 @@
 
 namespace App\Providers\Listeners;
 
-
-use App\Http\Middleware\Authenticate;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Router;
+use App\Http\Mapping;
 
 class RouterListener extends Plugin
 {
 
-    public function matchedRoute(Event $event, Router $handle)
+    public function afterCheckRoutes(Event $event, Router $router)
     {
-        $auth = new Authenticate($handle->getDI());
-        $auth->handle($handle->getDI()->get('request'));
+        // 全局中间件
+        $mapping = new Mapping();
+        foreach ($mapping->middleware as $value) {
+            $class = new $value($this->getDI());
+            if ($class->handle($this->request) !== true) {
+                break;
+            }
+        }
     }
 
 }
