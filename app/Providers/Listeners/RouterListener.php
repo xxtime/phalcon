@@ -2,6 +2,10 @@
 /**
  * @link https://docs.phalconphp.com/3.4/zh-cn/routing
  *
+ * 备注:
+ * 作用在每条路由配置   beforeCheckRoute matchedRoute notMatchedRoute
+ * 作用在整个路由组前后 beforeCheckRoutes afterCheckRoutes
+ *
  * public function beforeCheckRoutes()
  * public function beforeCheckRoute()
  * public function matchedRoute()
