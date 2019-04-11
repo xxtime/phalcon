@@ -1,6 +1,14 @@
 <?php
-
 /**
+ * High performance, PHP framework
+ *    ___    __          __
+ *   / _ \  / /  ___ _  / / ____ ___   ___
+ *  / ___/ / _ \/ _ `/ / / / __// _ \ / _ \
+ * /_/    /_//_/\_,_/ /_/  \__/ \___//_//_/
+ *
+ * @link https://www.xxtime.com
+ * @link https://github.com/xxtime/phalcon
+ *
  * USAGE:
  * $r = new \App\System\Route($router);
  * $r->addResource('/product', 'V1\Product','{id:[a-z0-9]{1,24}}')->only('show');
@@ -8,7 +16,6 @@
  */
 
 namespace App\System;
-
 
 use Phalcon\Mvc\Router\Group;
 use Exception;

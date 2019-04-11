@@ -22,5 +22,4 @@ use Phalcon\Mvc\Application;
 class ApplicationListener extends Plugin
 {
 
-
 }
