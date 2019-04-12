@@ -44,7 +44,7 @@ return [
     | Default 'UTC'. EXP: 'PRC', 'Asia/Shanghai'
     |
     */
-    "timezone"  => env("APP_TIMEZONE", "UTC"),
+    'timezone'  => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     | Default 'en_US'
     |
     */
-    'lang'      => 'en_US',
+    'lang'      => env('APP_LANG', 'en_US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     | Default 'AES-256-CFB'
     |
     */
-    'cipher'    => 'AES-256-CFB',
+    'cipher'    => env('APP_CIPHER', 'AES-256-CFB'),
 
     /*
     |--------------------------------------------------------------------------

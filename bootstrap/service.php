@@ -40,7 +40,7 @@ $di->set('config', function () {
 
 
 $di->set('lang', function () {
-    return new System\Lang();
+    return new System\Language();
 }, true);
 
 

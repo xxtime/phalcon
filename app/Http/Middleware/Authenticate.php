@@ -18,7 +18,7 @@ use Phalcon\Http\RequestInterface;
 /**
  * Class Authenticate
  * @package App\Http\Middleware
- * @property \Phalcon\Mvc\Dispatcher $dispatcher
+ * @property \Phalcon\Mvc\RouterInterface $router
  * @property \Phalcon\Http\ResponseInterface $response
  */
 class Authenticate extends Middleware
@@ -29,8 +29,8 @@ class Authenticate extends Middleware
 
     public function handle(RequestInterface $request)
     {
-        $this->dispatcher = $this->di->get('dispatcher');
-        $controllerName = $this->dispatcher->getControllerName();
+        $this->router = $this->di->get('router');
+        $controllerName = $this->router->getControllerName();
         if (in_array($controllerName, $this->except)) {
             return true;
         }

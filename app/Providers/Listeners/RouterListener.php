@@ -19,10 +19,23 @@ namespace App\Providers\Listeners;
 use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Router;
+use App\Http\Mapping;
 
 class RouterListener extends Plugin
 {
 
-    // public function afterCheckRoutes(Event $event, Router $router) {}
+    public function afterCheckRoutes(Event $event, Router $router)
+    {
+
+        // 全局中间件
+        $mapping = new Mapping();
+        foreach ($mapping->middleware as $value) {
+            $class = new $value($this->getDI());
+            if ($class->handle($this->request) !== true) {
+                exit(0);
+            }
+        }
+
+    }
 
 }

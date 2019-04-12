@@ -15,7 +15,11 @@ namespace App\System;
 use Phalcon\Mvc\User\Component;
 use Phalcon\Translate\Adapter\NativeArray;
 
-class Lang extends Component
+/**
+ * Class Language
+ * @property \Phalcon\Config $config
+ */
+class Language extends Component
 {
 
     private $lang = null;

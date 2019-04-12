@@ -21,11 +21,11 @@ class DbListener extends Plugin
     {
         $di = DI::getDefault();
         if (preg_match('/drop|alter/i', $pdo->getSQLStatement())) {
-            $di->get('logger', ['sql' . date('Ymd')])->error('disable: ' . $pdo->getSQLStatement());
+            $di->get('logger', ['sql' . date('Ymd')])->error('DISABLE: ' . $pdo->getSQLStatement());
             // return false;
             $di['response']->redirect('error');
             $di['response']->send();
-            exit();
+            exit(0);
         }
         if ($di['config']->path("app.debug")) {
             $di->get('logger', ['sql' . date('Ymd')])->log($pdo->getSQLStatement());
