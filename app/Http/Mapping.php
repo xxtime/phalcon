@@ -20,9 +20,9 @@ class Mapping
      * @var array
      */
     public $middleware = [
-        //\App\Http\Middleware\Authenticate::class,
-        //\App\Http\Middleware\FilterParameter::class,
-        //\App\Http\Middleware\CsrfToken::class,
+        \App\Http\Middleware\Authenticate::class,
+        \App\Http\Middleware\FilterParameter::class,
+        \App\Http\Middleware\CsrfToken::class,
     ];
 
     /**

@@ -27,6 +27,11 @@ class Authenticate extends Middleware
     private $except = [
     ];
 
+    /**
+     * If not return true this will throw a MiddlewareException
+     * @param RequestInterface $request
+     * @return bool
+     */
     public function handle(RequestInterface $request)
     {
         $this->router = $this->di->get('router');
