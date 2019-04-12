@@ -1,4 +1,9 @@
 ## About Phalcon
+基于Phalcon的高性能PHP框架，集成Composer 支持MongoDB Redis操作，监听器，中间件，以及多语言支持
+
+[![GitHub license](https://img.shields.io/github/license/xxtime/phalcon.svg)](https://github.com/xxtime/phalcon)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/xxtime/phalcon.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fxxtime%2Fphalcon)
+
 * A framework which use phalcon
 * High performance
 * Composer
@@ -19,15 +24,11 @@
 
 
 ## How to use
-1. cd to /ROOT/  
+1. cd to /{$root}/  
 2. copy .env.example to .env  
 
-## File path
-* /config  -   config files  
-* /docs        -   documents files  
 
-
-## Component
+## Components
 component | intro | document
 --- | --- | ---
 [zendframework/zend-permissions-rbac](https://packagist.org/packages/zendframework/zend-permissions-rbac) | RBAC  | [docs](https://docs.zendframework.com/zend-permissions-rbac/)
