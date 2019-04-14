@@ -1,8 +1,8 @@
 const folder = {
-  tmp: ".tmp/",
+  tmp: "storage/.tmp/",
   src: "resources/",
-  dist: "dist/",
-  dist_assets: "dist/assets/"
+  dist: "public/",
+  dist_assets: "public/assets/"
 };
 
 const { src, dest, watch, series, parallel, lastRun } = require('gulp');
@@ -98,11 +98,11 @@ function lintTest() {
 };
 
 function html() {
-  return src(folder.src + '*.html')
+  return src(folder.src + '**/*.phtml')
     .pipe($.useref({searchPath: [folder.tmp, folder.src, '.']}))
     .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
     .pipe($.if(/\.css$/, $.postcss([cssnano({safe: true, autoprefixer: false})])))
-    .pipe($.if(/\.html$/, $.htmlmin({
+    .pipe($.if(/\.phtml$/, $.htmlmin({
       collapseWhitespace: true,
       minifyCSS: true,
       minifyJS: {compress: {drop_console: true}},
@@ -134,15 +134,15 @@ function extras() {
     '!' + folder.src + '*.html'
   ], {
     dot: true
-  }).pipe(dest('dist'));
+  }).pipe(dest(folder.dist));
 };
 
 function clean() {
-  return del([folder.tmp, 'dist'])
+  return del([folder.tmp, folder.dist_assets])
 }
 
 function measureSize() {
-  return src('dist/**/*')
+  return src(folder.dist + '**/*')
     .pipe($.size({title: 'build', gzip: true}));
 }
 

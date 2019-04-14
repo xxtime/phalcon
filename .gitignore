@@ -4,8 +4,9 @@ bower_components
 package-lock.json
 
 # compiled output
-/dist
 /build
+/dist
+/public
 /.tmp
 
 # System Files
