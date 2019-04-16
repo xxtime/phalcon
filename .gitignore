@@ -6,8 +6,6 @@ package-lock.json
 # compiled output
 /build
 /dist
-/public
-/.tmp
 
 # System Files
 .DS_Store
