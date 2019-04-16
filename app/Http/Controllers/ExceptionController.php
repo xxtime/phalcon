@@ -20,7 +20,7 @@ class ExceptionController extends BaseController
     public function statusNotFoundAction()
     {
         $this->response->setStatusCode(404, 'Not Found');
-        $this->view->pick("exception/StatusNotFound");
+        $this->view->pick("default/statusNotFound");
     }
 
 }
