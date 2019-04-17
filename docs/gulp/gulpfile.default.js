@@ -5,7 +5,7 @@ const folder = {
     dist_assets: 'public/assets/',
 }
 
-const {src, dest, series, parallel} = require('gulp');
+const {src, dest, watch, series, parallel} = require('gulp');
 const del = require('del');
 const browserSync = require('browser-sync').create();
 const htmlmin = require('gulp-htmlmin'); // 压缩html
@@ -102,13 +102,13 @@ function startAppServer() {
         }*/
     });
 
-    browserSync.watch([
+    watch([
         folder.src + 'views/**/*.phtml',
         folder.src + 'assets/images/**/*',
         folder.src + 'assets/fonts/**/*'
     ]).on('change', browserSync.reload);
-    browserSync.watch(folder.src + 'assets/styles/**/*.{scss,sass}', css).on('change', browserSync.reload);
-    browserSync.watch(folder.src + 'assets/scripts/**/*.js', js).on('change', browserSync.reload);
+    watch(folder.src + 'assets/styles/**/*.{scss,sass}', css).on('change', browserSync.reload);
+    watch(folder.src + 'assets/scripts/**/*.js', js).on('change', browserSync.reload);
 }
 
 // 构建
