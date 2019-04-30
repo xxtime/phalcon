@@ -71,7 +71,7 @@ if (!function_exists('loadEnv')) {
 if (!function_exists('config')) {
     function config($string)
     {
-        return $GLOBALS['di']['config']->path($string);
+        return $GLOBALS['app']->di['config']->path($string);
     }
 }
 
