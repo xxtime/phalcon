@@ -76,7 +76,7 @@ class Framework
         */
         if ($this->di['config']->app->debug) {
             $logs = $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'] . ' ' . $_SERVER['SERVER_PROTOCOL'] . "\n";
-            foreach (getallheaders() as $key => $value) {
+            foreach (getAllHeaders() as $key => $value) {
                 $logs .= $key . ': ' . $value . "\n";
             }
             $logs .= "\n" . file_get_contents("php://input");

@@ -75,13 +75,13 @@ if (!function_exists('config')) {
     }
 }
 
-if (!function_exists('getallheaders')) {
+if (!function_exists('getAllHeaders')) {
     /**
      * @doc https://github.com/ralouphie/getallheaders
      * Get all HTTP header key/values as an associative array for the current request.
      * @return string[string] The HTTP header key/value pairs.
      */
-    function getallheaders()
+    function getAllHeaders()
     {
         $headers = array();
         $copy_server = array(
