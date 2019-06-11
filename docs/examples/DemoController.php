@@ -16,7 +16,7 @@ use Endroid\QrCode\QrCode;
 use PHPGangsta_GoogleAuthenticator;
 
 /**
- * @property \App\Providers\System\Lang $lang
+ * @property \App\System\Language $lang
  */
 class DemoController extends Controller
 {
