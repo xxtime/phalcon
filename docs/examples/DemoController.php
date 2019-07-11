@@ -237,6 +237,7 @@ class DemoController extends Controller
 
         // also can write like this
         // $this->view->text = $this->locale;           // in the controller
+        // {{text._('hi', ['name' => 'Joe Chu'])}}      // in the view file
         // {{text->_('hi', ['name' => 'Joe Chu'])}}     // in the view file
     }
 
