@@ -34,7 +34,7 @@ component | intro | document
 [zendframework/zend-permissions-rbac](https://packagist.org/packages/zendframework/zend-permissions-rbac) | RBAC  | [docs](https://docs.zendframework.com/zend-permissions-rbac/)
 [zendframework/zend-crypt](https://packagist.org/packages/zendframework/zend-crypt) | 加密和密码HASH  | [docs](https://docs.zendframework.com/zend-crypt/)
 [firebase/php-jwt](https://packagist.org/packages/firebase/php-jwt) | JWT(JSON Web Tokens)  | [docs](https://github.com/firebase/php-jwt)
-[endroid/qrcode](https://packagist.org/packages/endroid/qrcode) | 用于生成二维码  | [docs](https://endroid.nl/)
+[endroid/qr-code](https://packagist.org/packages/endroid/qr-code) | 用于生成二维码  | [docs](https://endroid.nl/)
 [phpgangsta/googleauthenticator](https://packagist.org/packages/phpgangsta/googleauthenticator) | 令牌验证相关  | [docs](https://github.com/PHPGangsta/GoogleAuthenticator)
 [overtrue/wechat](https://packagist.org/packages/overtrue/wechat) | 微信SDK  | [docs](https://easywechat.org/)
 [omnipay/omnipay](https://packagist.org/packages/omnipay/omnipay) | 支付Omnipay  | [docs](http://omnipay.thephpleague.com/)

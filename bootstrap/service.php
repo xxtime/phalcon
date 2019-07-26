@@ -45,7 +45,7 @@ $di->set('lang', function () {
 
 
 $di->set('router', function () use ($di) {
-    $router = require ROOT_DIR . '/routes/web.php';
+    $router = require ROOT_DIR . '/config/routes/web.php';
     $router->setEventsManager($di->get('eventsManager'));
     return $router;
 }, true);
