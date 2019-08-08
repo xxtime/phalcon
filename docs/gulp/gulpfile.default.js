@@ -15,8 +15,12 @@ const rename = require("gulp-rename"); // 重命名
 const gulpif = require('gulp-if'); // 判断
 const sass = require('gulp-sass'); // 解析sass
 const cssnano = require('cssnano'); // 压缩css
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 const concat = require('gulp-concat'); // 合并文件
 const uglify = require('gulp-uglify'); // 压缩js
+const sourceMap = require('gulp-sourcemaps');
+const browserify = require('browserify');
 
 // 以下两个一起使用，自动处理浏览器兼容问题
 const postcss = require('gulp-postcss');
@@ -67,6 +71,26 @@ function js() {
         //.pipe(gulpif(/\.js$/, uglify({compress: {drop_console: true}})))
         .pipe(concat("main.js"))
         .pipe(dest(folder.dist + 'assets/js', {sourcemaps: true}))
+}
+
+// ES6
+function script() {
+    var b = browserify({
+        transform: ['babelify'],
+        entries: folder.src + "assets/scripts/main.js",
+        debug: true
+    });
+
+    return b.bundle()
+        .pipe(source('main.js'))
+        .pipe(buffer())
+        .pipe(sourceMap.init({loadMaps: true}))
+        .pipe(plumber())
+        .pipe(dest(folder.dist_assets + 'js'))
+        .pipe(rename({suffix: ".min"}))
+        .pipe(uglify())
+        .pipe(sourceMap.write('.'))
+        .pipe(dest(folder.dist_assets + 'js'));
 }
 
 // 压缩输出静态文件
@@ -129,6 +153,7 @@ const develop = series(
 );
 
 exports.js = js;
+exports.script = script;
 exports.css = css;
 exports.html = html;
 exports.build = build;

@@ -23,6 +23,6 @@ trim_trailing_whitespace = false
 [*.{yml,json,xml}]
 indent_size = 2
 
-[package.json]
+[{package.json,.babelrc}]
 indent_style = space
 indent_size = 2
