@@ -47,7 +47,7 @@ function html() {
 
 // 编译css
 function css() {
-    return src(folder.src + 'assets/styles/**/*.{scss,sass}')
+    return src(folder.src + 'assets/css/**/*.{scss,sass}')
         .pipe(plumber())
         .pipe(sass.sync({
             outputStyle: 'expanded',
@@ -64,7 +64,7 @@ function css() {
 
 // 编译js
 function js() {
-    return src(folder.src + 'assets/scripts/**/*.js', {sourcemaps: true})
+    return src(folder.src + 'assets/js/**/*.js', {sourcemaps: true})
         .pipe(plumber())
         //.pipe($.babel())
         //.pipe(concat('app.min.js'))
@@ -77,7 +77,7 @@ function js() {
 function script() {
     var b = browserify({
         transform: ['babelify'],
-        entries: folder.src + "assets/scripts/main.js",
+        entries: folder.src + "assets/js/main.js",
         debug: true
     });
 
@@ -131,8 +131,8 @@ function startAppServer() {
         folder.src + 'assets/images/**/*',
         folder.src + 'assets/fonts/**/*'
     ]).on('change', browserSync.reload);
-    watch(folder.src + 'assets/styles/**/*.{scss,sass}', css).on('change', browserSync.reload);
-    watch(folder.src + 'assets/scripts/**/*.js', js).on('change', browserSync.reload);
+    watch(folder.src + 'assets/css/**/*.{scss,sass}', css).on('change', browserSync.reload);
+    watch(folder.src + 'assets/js/**/*.js', js).on('change', browserSync.reload);
 }
 
 // 构建
