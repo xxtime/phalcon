@@ -98,7 +98,7 @@ $di->set('dispatcher', function () use ($di) {
 
 $di->set('view', function () use ($di) {
     $view = new View();
-    $view->setViewsDir(ROOT_DIR . '/resources/views/');
+    $view->setViewsDir(ROOT_DIR . '/resources/templates/');
     $view->registerEngines([
         '.phtml' => function ($view, $di) {
             $volt = new Volt($view, $di);

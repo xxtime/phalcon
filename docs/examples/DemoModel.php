@@ -11,6 +11,14 @@ namespace App\Http\Models;
 use Phalcon\DI;
 use Phalcon\Db;
 
+
+/**
+ * 数据库操作
+ * @see https://docs.phalcon.io/4.0/zh-cn/db-layer
+ * @see https://docs.phalcon.io/4.0/zh-cn/db-phql
+ * @see https://docs.phalcon.io/4.0/zh-cn/db-models
+ * @see https://docs.phalcon.io/4.0/zh-cn/db-odm
+ */
 class DemoModel extends Model
 {
 
@@ -23,9 +31,7 @@ class DemoModel extends Model
         $this->dbConnectionData = DI::getDefault()->get('db');
     }
 
-
     // 写操作
-    // link https://docs.phalconphp.com/zh/latest/reference/db.html#binding-parameters
     public function demo()
     {
         // 写操作 SQL占位符 insert update delete
@@ -87,7 +93,6 @@ class DemoModel extends Model
         $success = DI::getDefault()->get('db')->delete("robots", "id = ?", array(101));
     }
 
-
     // 读操作
     public function findDemo()
     {
@@ -100,8 +105,7 @@ class DemoModel extends Model
         dump($sql, $data);
     }
 
-
-    // 事务
+    // 事务 @see https://docs.phalcon.io/4.0/zh-cn/db-models-transactions
     public function transactionsDemo()
     {
 

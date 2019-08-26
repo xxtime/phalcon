@@ -111,9 +111,11 @@ class Route
                         $group->addGet('/' . $value['regular'], ['action' => 'show']);
                         break;
                     case 'update':
+                        $group->addPut('', ['action' => 'update']);
                         $group->addPut('/' . $value['regular'], ['action' => 'update']);
                         break;
                     case 'destroy':
+                        $group->addDelete('', ['action' => 'destroy']);
                         $group->addDelete('/' . $value['regular'], ['action' => 'destroy']);
                         break;
                     default:

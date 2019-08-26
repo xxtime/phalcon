@@ -46,6 +46,7 @@ component | intro | document
 [mobiledetect/mobiledetectlib](https://packagist.org/packages/mobiledetect/mobiledetectlib) | 设备识别  | [docs](http://mobiledetect.net/)
 [mongodb/mongodb](https://packagist.org/packages/mongodb/mongodb) | MongoDB抽象层  | [docs](https://docs.mongodb.com/php-library/)
 [hashids/hashids](https://packagist.org/packages/hashids/hashids) | Hashids  |[docs](http://hashids.org/php/)
+[jenssegers/optimus](https://packagist.org/packages/jenssegers/optimus) | ID转换  |[docs](https://github.com/jenssegers/optimus)
 [league/climate](https://packagist.org/packages/league/climate) | 命令行颜色  | [docs](http://climate.thephpleague.com/)
 
 

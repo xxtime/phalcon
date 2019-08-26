@@ -37,8 +37,9 @@ class DemoController extends Controller
     }
 
 
-    // @see http://docs.phalconphp.com/zh/latest/reference/filter.html
-    // @see http://docs.phalconphp.com/zh/latest/reference/request.html
+    // 防注入 @see https://docs.phalcon.io/4.0/zh-cn/escaper
+    // 过滤器 @see https://docs.phalcon.io/4.0/zh-cn/filter
+    // 收请求 @see https://docs.phalcon.io/4.0/zh-cn/request
     public function initialize()
     {
         // parent::initialize();
@@ -59,7 +60,7 @@ class DemoController extends Controller
     }
 
 
-    // @see https://docs.phalconphp.com/zh/latest/reference/models.html#binding-parameters
+    // @see https://docs.phalcon.io/4.0/zh-cn/db-models
     public function findAction()
     {
         $robots = $this->demoModel->find(
@@ -167,7 +168,7 @@ class DemoController extends Controller
     }
 
 
-    // @see https://docs.phalconphp.com/en/latest/reference/cookies.html
+    // @see https://docs.phalcon.io/4.0/zh-cn/cookies
     public function cookiesAction()
     {
         $this->cookies->set('foo', 'some cookies', time() + 86400);
@@ -180,7 +181,7 @@ class DemoController extends Controller
     }
 
 
-    // @see https://docs.phalconphp.com/zh/latest/reference/volt.html
+    // @see https://docs.phalcon.io/4.0/zh-cn/volt
     public function templateAction()
     {
         $this->view->data = time();
@@ -226,8 +227,8 @@ class DemoController extends Controller
     }
 
 
-    // @see https://docs.phalconphp.com/zh/3.3/translate
-    // @see /ROOT/app/providers/Components/Locale.php
+    // @see https://docs.phalcon.io/4.0/zh-cn/translate
+    // @see /ROOT/app/System/Language.php
     public function translatorAction()
     {
         // method one
@@ -243,7 +244,6 @@ class DemoController extends Controller
 
 
     // PHP gettext
-    // translation file locale: app/locale/zh_CN/LC_MESSAGES/zh_CN.mo
     // @see http://php.net/manual/en/book.gettext.php
     //
     // $lang = 'zh_CN';
