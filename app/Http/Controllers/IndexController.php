@@ -12,11 +12,17 @@
 
 namespace App\Http\Controllers;
 
+use Phalcon\Version;
+
 class IndexController extends Controller
 {
 
     public function indexAction()
     {
+        $this->view->setVars([
+            "pha_version" => Version::get(),
+            "php_version" => phpversion(),
+        ]);
         $this->view->pick("default/default");
     }
 

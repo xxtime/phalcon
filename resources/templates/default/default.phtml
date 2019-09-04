@@ -49,6 +49,11 @@
             font-size: 84px;
         }
 
+        .title > span {
+            font-size: 22px;
+            position: absolute;
+        }
+
         .links > a {
             color: #636b6f;
             padding: 0 25px;
@@ -68,10 +73,10 @@
 <div class="flex-center position-ref full-height">
 
     <div class="content">
-        <div class="title m-b-md">
-            Phalcon
+        <div class="title">
+            Phalcon<span>{{pha_version}}</span>
         </div>
-
+        <p class="m-b-md">awesome framework running on php {{php_version}}</p>
         <div class="links">
             <a href="https://docs.phalconphp.com">Documentation</a>
             <a href="https://phalconphp.com/en/download/linux">Download</a>
