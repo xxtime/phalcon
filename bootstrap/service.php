@@ -30,7 +30,7 @@ $di = new FactoryDefault();
 
 $di->set('config', function () {
     $config = new Config(['app' => include CONFIG_DIR . "/app.php"]);
-    $c = [];
+    $c      = [];
     foreach ($config->path("app.config") as $name => $item) {
         $c[$name] = include $item;
     }

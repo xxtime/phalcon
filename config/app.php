@@ -10,7 +10,7 @@ return [
     | Default is XT
     |
     */
-    'name'      => env('APP_NAME', 'XT'),
+    'name'      => env('APP_NAME', 'Phalcon'),
 
     /*
     |--------------------------------------------------------------------------

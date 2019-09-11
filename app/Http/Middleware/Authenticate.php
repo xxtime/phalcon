@@ -34,7 +34,7 @@ class Authenticate extends Middleware
      */
     public function handle(RequestInterface $request)
     {
-        $this->router = $this->di->get('router');
+        $this->router   = $this->di->get('router');
         $controllerName = $this->router->getControllerName();
         if (in_array($controllerName, $this->except)) {
             return true;

@@ -70,7 +70,7 @@ class Route
         if (!$uri || !$handle) {
             throw new Exception('invalid resource');
         }
-        $this->_uri = $uri;
+        $this->_uri           = $uri;
         $this->resource[$uri] = [
             'regular' => $idFormat ? $idFormat : $this->getIdFormat(),
             'handle'  => ucfirst($handle),
