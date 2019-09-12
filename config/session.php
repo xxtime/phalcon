@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 7200),
+    'lifetime' => env('SESSION_LIFETIME', 86400),
 
     /*
     |--------------------------------------------------------------------------
