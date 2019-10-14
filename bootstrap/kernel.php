@@ -42,9 +42,9 @@ class Framework
             'App' => APP_DIR,
         ))->register();
 
-        require_once ROOT_DIR . '/vendor/autoload.php';
-        require_once ROOT_DIR . '/bootstrap/helpers.php';
-        $this->di = require_once ROOT_DIR . '/bootstrap/service.php';
+        require_once ROOT_DIR . 'vendor/autoload.php';
+        require_once ROOT_DIR . 'bootstrap/helpers.php';
+        $this->di = require_once ROOT_DIR . 'bootstrap/service.php';
 
         loadEnv();
     }

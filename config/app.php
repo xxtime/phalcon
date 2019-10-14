@@ -119,9 +119,9 @@ return [
     |
     */
     'config'    => [
-        'session'  => CONFIG_DIR . '/session.php',
-        'database' => CONFIG_DIR . '/database.php',
-        'cache'    => CONFIG_DIR . '/cache.php',
+        'session'  => CONFIG_DIR . 'session.php',
+        'database' => CONFIG_DIR . 'database.php',
+        'cache'    => CONFIG_DIR . 'cache.php',
     ]
 
 ];

@@ -60,13 +60,13 @@ class Language extends Component
 
     private function getTranslator($file = 'message')
     {
-        $path = ROOT_DIR . '/resources/lang/' . $this->getLang() . DIRECTORY_SEPARATOR . $file . '.php';
+        $path = ROOT_DIR . 'resources/lang/' . $this->getLang() . DIRECTORY_SEPARATOR . $file . '.php';
 
         if (file_exists($path)) {
             $messages = include $path;
         }
         else {
-            $messages = include ROOT_DIR . '/resources/lang/' . $this->config->app->lang . DIRECTORY_SEPARATOR . $file . '.php';
+            $messages = include ROOT_DIR . 'resources/lang/' . $this->config->app->lang . DIRECTORY_SEPARATOR . $file . '.php';
         }
 
         return new NativeArray(['content' => $messages]);

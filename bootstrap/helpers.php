@@ -51,8 +51,8 @@ if (!function_exists('env')) {
 if (!function_exists('loadEnv')) {
     function loadEnv()
     {
-        if (file_exists(ROOT_DIR . '/.env')) {
-            $path = ROOT_DIR . '/.env';
+        if (file_exists(ROOT_DIR . '.env')) {
+            $path = ROOT_DIR . '.env';
         }
         else {
             return false;

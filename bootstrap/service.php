@@ -29,7 +29,7 @@ $di = new FactoryDefault();
 
 
 $di->set('config', function () {
-    $config = new Config(['app' => include CONFIG_DIR . "/app.php"]);
+    $config = new Config(['app' => include CONFIG_DIR . "app.php"]);
     $c      = [];
     foreach ($config->path("app.config") as $name => $item) {
         $c[$name] = include $item;
@@ -45,14 +45,14 @@ $di->set('lang', function () {
 
 
 $di->set('router', function () use ($di) {
-    $router = require ROOT_DIR . '/config/routes/web.php';
+    $router = require ROOT_DIR . 'config/routes/web.php';
     $router->setEventsManager($di->get('eventsManager'));
     return $router;
 }, true);
 
 
 $di->set('logger', function ($file = null) {
-    $logger = new FileLogger(ROOT_DIR . '/storage/logs/' . ($file ? $file : date('Ymd')));
+    $logger = new FileLogger(ROOT_DIR . 'storage/logs/' . ($file ? $file : date('Ymd')));
     return $logger;
 }, false);
 
@@ -98,11 +98,11 @@ $di->set('dispatcher', function () use ($di) {
 
 $di->set('view', function () use ($di) {
     $view = new View();
-    $view->setViewsDir(ROOT_DIR . '/resources/templates/');
+    $view->setViewsDir(ROOT_DIR . 'resources/templates/');
     $view->registerEngines([
         '.phtml' => function ($view, $di) {
             $volt = new Volt($view, $di);
-            $volt->setOptions(['compiledPath' => ROOT_DIR . '/storage/cache/']);
+            $volt->setOptions(['compiledPath' => ROOT_DIR . 'storage/cache/']);
             return $volt;
         }
     ]);
@@ -120,7 +120,7 @@ $di->set('modelsCache', function () use ($di) {
             'prefix' => 'cache|',
         ]);
     }
-    return new FileCache($frontCache, ['cacheDir' => ROOT_DIR . '/storage/cache/', 'prefix' => 'cache_']);
+    return new FileCache($frontCache, ['cacheDir' => ROOT_DIR . 'storage/cache/', 'prefix' => 'cache_']);
 }, true);
 
 

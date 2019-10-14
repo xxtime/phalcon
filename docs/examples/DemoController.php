@@ -250,7 +250,7 @@ class DemoController extends Controller
     // setlocale(LC_ALL, $lang);
     // $domain = $lang;
     // bind_textdomain_codeset($domain, 'UTF-8');
-    // bindtextdomain($domain, APP_DIR . '/locale');
+    // bindtextdomain($domain, APP_DIR . 'locale');
     // textdomain($domain);
 
 }
