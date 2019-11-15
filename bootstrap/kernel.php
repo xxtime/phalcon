@@ -62,7 +62,7 @@ class Framework
         switch ($this->di['config']->app->env != 'production') {
             case true:
                 $whoops = new \Whoops\Run;
-                $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+                $whoops->appendHandler(new \Whoops\Handler\PrettyPageHandler);
                 $whoops->register();
                 error_reporting(E_ALL);
                 break;
@@ -80,6 +80,7 @@ class Framework
                 $logs .= $key . ': ' . $value . "\n";
             }
             $logs .= "\n" . file_get_contents("php://input");
+            $logs .= "\n_____________________________________";
             $this->di->get('logger', [date('Ymd')])->log($logs, Logger::INFO);
         }
 
