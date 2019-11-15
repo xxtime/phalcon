@@ -79,8 +79,10 @@ class Framework
             foreach (getAllHeaders() as $key => $value) {
                 $logs .= $key . ': ' . $value . "\n";
             }
-            $logs .= "\n" . file_get_contents("php://input");
-            $logs .= "\n_____________________________________";
+            if ($body = file_get_contents("php://input")) {
+                $logs .= "\n" . $body . "\n";
+            }
+            $logs .= "_____________________________________";
             $this->di->get('logger', [date('Ymd')])->log($logs, Logger::INFO);
         }
 
