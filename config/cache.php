@@ -12,6 +12,6 @@ return [
 
     'port' => env('CACHE_PORT', 6379),
 
-    'db' => 0,
+    'db' => env("CACHE_DATABASE", 0),
 
 ];
