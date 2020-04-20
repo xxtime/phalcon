@@ -11,8 +11,8 @@
  *
  * USAGE:
  * $r = new \App\System\Route($router);
- * $r->addResource('/product', 'V1\Product','{id:[a-z0-9]{1,24}}')->only('show');
- * $r->addResource('/news', 'V1\News')->except('destroy');
+ * $r->addResource('/product', 'V1\Product','{id:[a-z0-9]{1,24}}')->only('get');
+ * $r->addResource('/news', 'V1\News')->except('delete');
  */
 
 namespace App\System;
@@ -32,7 +32,7 @@ class Route
     private $idFormat = '{id:[a-z0-9]{1,24}}';
 
 
-    private $allowAction = ['index', 'store', 'show', 'update', 'destroy'];
+    private $allowAction = ['index', 'get', 'post', 'put', 'delete'];
 
 
     private $_uri;
@@ -104,19 +104,19 @@ class Route
                     case 'index':
                         $group->addGet('', ['action' => 'index']);
                         break;
-                    case 'store':
-                        $group->addPost('', ['action' => 'store']);
+                    case 'post':
+                        $group->addPost('', ['action' => 'post']);
                         break;
-                    case 'show':
-                        $group->addGet('/' . $value['regular'], ['action' => 'show']);
+                    case 'get':
+                        $group->addGet('/' . $value['regular'], ['action' => 'get']);
                         break;
-                    case 'update':
-                        $group->addPut('', ['action' => 'update']);
-                        $group->addPut('/' . $value['regular'], ['action' => 'update']);
+                    case 'put':
+                        $group->addPut('', ['action' => 'put']);
+                        $group->addPut('/' . $value['regular'], ['action' => 'put']);
                         break;
-                    case 'destroy':
-                        $group->addDelete('', ['action' => 'destroy']);
-                        $group->addDelete('/' . $value['regular'], ['action' => 'destroy']);
+                    case 'delete':
+                        $group->addDelete('', ['action' => 'delete']);
+                        $group->addDelete('/' . $value['regular'], ['action' => 'delete']);
                         break;
                     default:
                         throw new Exception('invalid route action');

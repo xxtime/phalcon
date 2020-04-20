@@ -8,7 +8,7 @@
  * Add RESTFUL Resource
  * $resource = new Providers\System\Route($router);
  * $resource->addResource('/products', 'V1\Products');
- * $resource->addResource('/news', 'V1\News', '{id:[0-9]{1,10}}')->only('show');
+ * $resource->addResource('/news', 'V1\News', '{id:[0-9]{1,10}}')->only('get');
  */
 
 use Phalcon\Mvc\Router;
