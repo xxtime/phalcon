@@ -24,6 +24,7 @@ use Phalcon\Mvc\Dispatcher;
  * @property \MongoDB\Client $mongodb
  * @property \App\System\Language $lang
  * @property \App\Providers\Supports\Adaptor $supports
+ * @property \Laminas\Log\Logger $logger
  */
 class Controller extends BaseController
 {

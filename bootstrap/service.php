@@ -14,13 +14,14 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Crypt,
     Phalcon\Config,
     Phalcon\Db\Adapter\Pdo\Mysql,
-    Phalcon\Logger\Adapter\File as FileLogger,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
     Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\View,
     Phalcon\Mvc\View\Engine\Volt,
+    Laminas\Log\Logger,
+    Laminas\Log\Writer\Stream,
     MongoDB\Client as MongoDBClient,
     App\Providers,
     App\System;
@@ -52,10 +53,18 @@ $di->set('router', function () use ($di) {
 }, true);
 
 
-$di->set('logger', function ($file = null) {
-    $logger = new FileLogger(ROOT_DIR . 'storage/logs/' . ($file ? $file : date('Ymd')));
+$di->set('logger', function () {
+    // @docs https://docs.laminas.dev/laminas-log
+    $logger = new Logger();
+    $writer = new Stream(ROOT_DIR . 'storage/logs/main.log');
+    $logger->addWriter($writer);
+
+    $wErr = new Stream(ROOT_DIR . 'storage/logs/err.log');
+    $wErr->addFilter(new \Laminas\Log\Filter\Priority(Logger::ERR));
+    $logger->addWriter($wErr);
+
     return $logger;
-}, false);
+}, true);
 
 
 $di->set('crypt', function () use ($di) {

@@ -11,7 +11,6 @@
  */
 
 use Phalcon\Loader;
-use Phalcon\Logger;
 use Phalcon\Mvc\Application;
 
 /**
@@ -83,7 +82,7 @@ class Framework
                 $logs .= "\n" . $body . "\n";
             }
             $logs .= "_____________________________________";
-            $this->di->get('logger', [date('Ymd')])->log($logs, Logger::INFO);
+            $this->di->get('logger')->debug($logs);
         }
 
         /*
