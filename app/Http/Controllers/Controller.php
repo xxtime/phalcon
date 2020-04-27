@@ -23,6 +23,7 @@ use Phalcon\Mvc\Dispatcher;
  * @property \Redis $redis
  * @property \MongoDB\Client $mongodb
  * @property \App\System\Language $lang
+ * @property \App\Providers\Supports\Adaptor $supports
  */
 class Controller extends BaseController
 {

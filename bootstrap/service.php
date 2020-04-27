@@ -22,6 +22,7 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Mvc\View,
     Phalcon\Mvc\View\Engine\Volt,
     MongoDB\Client as MongoDBClient,
+    App\Providers,
     App\System;
 
 
@@ -73,7 +74,7 @@ $di->set('session', function () use ($di) {
                 "port"       => $di["config"]->path("database.redis.port"),
                 "persistent" => false,
                 "lifetime"   => $lifetime,
-                "index"      => 0,
+                "index"      => $di["config"]->path("database.redis.db"),
             ]);
         case  "file":
         default:
@@ -164,5 +165,9 @@ $di->set('mongodb', function () use ($di) {
         ]));
 }, true);
 
+
+$di->set('supports', function () use ($di) {
+    return new Providers\Supports\Adaptor($di);
+}, true);
 
 return $di;

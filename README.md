@@ -31,8 +31,8 @@
 ## Components
 component | intro | document
 --- | --- | ---
-[zendframework/zend-permissions-rbac](https://packagist.org/packages/zendframework/zend-permissions-rbac) | RBAC  | [docs](https://docs.zendframework.com/zend-permissions-rbac/)
-[zendframework/zend-crypt](https://packagist.org/packages/zendframework/zend-crypt) | 加密和密码HASH  | [docs](https://docs.zendframework.com/zend-crypt/)
+[laminas/laminas-permissions-rbac](https://packagist.org/packages/laminas/laminas-permissions-rbac) | RBAC  | [docs](https://docs.laminas.dev/laminas-permissions-rbac/)
+[laminas/laminas-crypt](https://packagist.org/packages/laminas/laminas-crypt) | 加密和密码HASH  | [docs](https://docs.laminas.dev/laminas-crypt/)
 [firebase/php-jwt](https://packagist.org/packages/firebase/php-jwt) | JWT(JSON Web Tokens)  | [docs](https://github.com/firebase/php-jwt)
 [endroid/qr-code](https://packagist.org/packages/endroid/qr-code) | 用于生成二维码  | [docs](https://endroid.nl/)
 [phpgangsta/googleauthenticator](https://packagist.org/packages/phpgangsta/googleauthenticator) | 令牌验证相关  | [docs](https://github.com/PHPGangsta/GoogleAuthenticator)
@@ -54,7 +54,7 @@ component | intro | document
 * [Aura](http://auraphp.com/)  
 * [Hoa](https://hoa-project.net/En/)  
 * [thephpleague](http://thephpleague.com/)  
-* [zend framework components](https://docs.zendframework.com/)  
+* [laminas components](https://docs.laminas.dev/components/)  
 * [symfony components](http://symfony.com/doc/current/components/index.html)  
 * [github awesome lists](https://github.com/sindresorhus/awesome)  
 * [github ziadoz awesome-php](https://github.com/ziadoz/awesome-php)  
