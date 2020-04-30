@@ -15,11 +15,10 @@
 
 namespace App\Providers\Listeners;
 
-use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Application;
 
-class ApplicationListener extends Plugin
+class ApplicationListener extends \Phalcon\Di\Injectable
 {
 
 }

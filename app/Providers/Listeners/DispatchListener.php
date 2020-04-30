@@ -22,11 +22,10 @@
 
 namespace App\Providers\Listeners;
 
-use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
 
-class DispatchListener extends Plugin
+class DispatchListener extends \Phalcon\Di\Injectable
 {
 
     // public function beforeDispatchLoop(Event $event, Dispatcher $dispatcher) {}

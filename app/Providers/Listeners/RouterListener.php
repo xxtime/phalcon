@@ -18,11 +18,10 @@ namespace App\Providers\Listeners;
 
 use App\Http\Exceptions\MiddlewareException;
 use App\Http\Mapping;
-use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Router;
 
-class RouterListener extends Plugin
+class RouterListener extends \Phalcon\Di\Injectable
 {
 
     public function afterCheckRoutes(Event $event, Router $router)

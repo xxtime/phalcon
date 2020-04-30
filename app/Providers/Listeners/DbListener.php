@@ -10,12 +10,11 @@
 namespace App\Providers\Listeners;
 
 use App\Http\Exceptions\ErrorException;
-use Phalcon\Mvc\User\Plugin;
 use Phalcon\Events\Event;
 use Phalcon\Db\Adapter\Pdo;
 use Phalcon\DI;
 
-class DbListener extends Plugin
+class DbListener extends \Phalcon\Di\Injectable
 {
 
     public function beforeQuery(Event $event, Pdo $pdo)

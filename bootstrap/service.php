@@ -18,6 +18,7 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
     Phalcon\Mvc\Dispatcher,
+    Phalcon\Mvc\ViewBaseInterface,
     Phalcon\Mvc\View,
     Phalcon\Mvc\View\Engine\Volt,
     Laminas\Log\Logger,
@@ -106,15 +107,30 @@ $di->set('dispatcher', function () use ($di) {
 }, true);
 
 
+$di->setShared(
+    'voltService',
+    function (ViewBaseInterface $view) use ($di) {
+        $volt = new Volt($view, $di);
+        $volt->setOptions(
+            [
+                'always'    => true,
+                'extension' => '.php',
+                'separator' => '_',
+                'stat'      => true,
+                'path'      => ROOT_DIR . 'storage/cache/',
+                'prefix'    => 'cache',
+            ]
+        );
+        return $volt;
+    }
+);
+
+
 $di->set('view', function () use ($di) {
     $view = new View();
     $view->setViewsDir(ROOT_DIR . 'resources/templates/');
     $view->registerEngines([
-        '.phtml' => function ($view, $di) {
-            $volt = new Volt($view, $di);
-            $volt->setOptions(['compiledPath' => ROOT_DIR . 'storage/cache/']);
-            return $volt;
-        }
+        '.phtml' => 'voltService',
     ]);
     return $view;
 }, true);

@@ -106,7 +106,7 @@ class Framework
         if ($this->di['config']->path('app.disableView')) {
             $application->useImplicitView(false);
         }
-        $application->handle()->send();
+        $application->handle($_SERVER["REQUEST_URI"])->send();
     }
 
 
