@@ -1,12 +1,12 @@
 <?php
 /**
- * High performance, PHP framework
- *    ___    __          __
- *   / _ \  / /  ___ _  / / ____ ___   ___
- *  / ___/ / _ \/ _ `/ / / / __// _ \ / _ \
- * /_/    /_//_/\_,_/ /_/  \__/ \___//_//_/
+ * Powered by ZLab
+ *  ____ _           _             _
+ * |_  /| |    __ _ | |__       __| | ___ __ __
+ *  / / | |__ / _` || '_ \  _  / _` |/ -_)\ V /
+ * /___||____|\__,_||_.__/ (_) \__,_|\___| \_/
  *
- * @link https://www.xxtime.com
+ * @link https://zlab.dev
  * @link https://github.com/xxtime/phalcon
  */
 

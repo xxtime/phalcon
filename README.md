@@ -66,4 +66,4 @@ component | intro | document
 ## About  
 * Project : [https://github.com/xxtime/phalcon](https://github.com/xxtime/phalcon)  
 * Document : [https://docs.phalconphp.com](https://docs.phalconphp.com)
-* Author : [https://www.xxtime.com](https://www.xxtime.com)  
+* Author : [https://zlab.dev](https://zlab.dev)  
