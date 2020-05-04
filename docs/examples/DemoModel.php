@@ -9,7 +9,7 @@ namespace App\Http\Models;
 
 
 use Phalcon\DI;
-use Phalcon\Db;
+use PDO;
 
 
 /**
@@ -100,7 +100,7 @@ class DemoModel extends Model
         $sql = "SELECT * FROM users WHERE username=:username";
         $bind = array('username' => 'demo@xxtime.com');
         $query = DI::getDefault()->get('db')->query($sql, $bind); //$query->numRows();
-        $query->setFetchMode(Db::FETCH_ASSOC);
+        $query->setFetchMode(PDO::FETCH_ASSOC);
         $data = $query->fetchAll(); // fetch
         dump($sql, $data);
     }

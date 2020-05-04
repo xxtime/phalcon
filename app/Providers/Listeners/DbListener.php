@@ -11,13 +11,13 @@ namespace App\Providers\Listeners;
 
 use App\Http\Exceptions\ErrorException;
 use Phalcon\Events\Event;
-use Phalcon\Db\Adapter\Pdo;
+use Phalcon\Db\Adapter\Pdo\AbstractPdo;
 use Phalcon\DI;
 
 class DbListener extends \Phalcon\Di\Injectable
 {
 
-    public function beforeQuery(Event $event, Pdo $pdo)
+    public function beforeQuery(Event $event, AbstractPdo $pdo)
     {
         $di = DI::getDefault();
         if (preg_match('/drop|alter/i', $pdo->getSQLStatement())) {
