@@ -57,10 +57,10 @@ $di->set('router', function () use ($di) {
 $di->set('logger', function () {
     // @docs https://docs.laminas.dev/laminas-log
     $logger = new Logger();
-    $writer = new Stream(ROOT_DIR . 'storage/logs/main.log');
+    $writer = new Stream(DATA_DIR . 'logs/main.log');
     $logger->addWriter($writer);
 
-    $wErr = new Stream(ROOT_DIR . 'storage/logs/err.log');
+    $wErr = new Stream(DATA_DIR . 'logs/err.log');
     $wErr->addFilter(new \Laminas\Log\Filter\Priority(Logger::ERR));
     $logger->addWriter($wErr);
 
@@ -117,7 +117,7 @@ $di->setShared(
                 'extension' => '.php',
                 'separator' => '_',
                 'stat'      => true,
-                'path'      => ROOT_DIR . 'storage/cache/',
+                'path'      => DATA_DIR . 'cache/',
                 'prefix'    => 'cache',
             ]
         );
@@ -128,7 +128,7 @@ $di->setShared(
 
 $di->set('view', function () use ($di) {
     $view = new View();
-    $view->setViewsDir(ROOT_DIR . 'resources/templates/');
+    $view->setViewsDir(ASSETS_DIR . 'templates/');
     $view->registerEngines([
         '.phtml' => 'voltService',
     ]);
@@ -146,7 +146,7 @@ $di->set('modelsCache', function () use ($di) {
             'prefix' => 'cache|',
         ]);
     }
-    return new FileCache($frontCache, ['cacheDir' => ROOT_DIR . 'storage/cache/', 'prefix' => 'cache_']);
+    return new FileCache($frontCache, ['cacheDir' => DATA_DIR . 'cache/', 'prefix' => 'cache_']);
 }, true);
 
 

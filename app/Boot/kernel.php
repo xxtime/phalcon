@@ -42,8 +42,8 @@ class Framework
         ))->register();
 
         require_once ROOT_DIR . 'vendor/autoload.php';
-        require_once ROOT_DIR . 'bootstrap/helpers.php';
-        $this->di = require_once ROOT_DIR . 'bootstrap/service.php';
+        require_once APP_DIR . 'Boot/helpers.php';
+        $this->di = require_once APP_DIR . 'Boot/services.php';
 
         loadEnv();
     }

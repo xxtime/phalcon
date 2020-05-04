@@ -1,5 +1,5 @@
 const folder = {
-    src: 'resources/',
+    src: 'var/assets/',
     tmp: '.tmp/',
     dist: 'public/',
     dist_assets: 'public/assets/',

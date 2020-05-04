@@ -18,5 +18,5 @@ Thumbs.db
 .env
 composer.lock
 public/
-storage/
+var/
 vendor/

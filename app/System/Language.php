@@ -12,14 +12,15 @@
 
 namespace App\System;
 
-use Phalcon\Mvc\User\Component;
 use Phalcon\Translate\Adapter\NativeArray;
+use Phalcon\Translate\InterpolatorFactory;
+use Phalcon\Translate\TranslateFactory;
 
 /**
  * Class Language
  * @property \Phalcon\Config $config
  */
-class Language extends Component
+class Language extends \Phalcon\Di\Injectable
 {
 
     private $lang = null;
@@ -60,16 +61,18 @@ class Language extends Component
 
     private function getTranslator($file = 'message')
     {
-        $path = ROOT_DIR . 'resources/lang/' . $this->getLang() . DIRECTORY_SEPARATOR . $file . '.php';
+        $path = ASSETS_DIR . 'lang/' . $this->getLang() . DIRECTORY_SEPARATOR . $file . '.php';
 
         if (file_exists($path)) {
             $messages = include $path;
         }
         else {
-            $messages = include ROOT_DIR . 'resources/lang/' . $this->config->app->lang . DIRECTORY_SEPARATOR . $file . '.php';
+            $messages = include ASSETS_DIR . 'lang/' . $this->config->app->lang . DIRECTORY_SEPARATOR . $file . '.php';
         }
 
-        return new NativeArray(['content' => $messages]);
+        return new NativeArray(new InterpolatorFactory(), [
+            'content' => $messages,
+        ]);
     }
 
 }
