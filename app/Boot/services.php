@@ -17,12 +17,17 @@ use Phalcon\DI\FactoryDefault,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
     Phalcon\Cache\Backend\Redis as RedisCache,
+    Phalcon\Session\Manager,
+    Phalcon\Session\Adapter\Stream,
+    Phalcon\Session\Adapter\Redis,
+    Phalcon\Storage\AdapterFactory,
+    Phalcon\Storage\SerializerFactory,
     Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\ViewBaseInterface,
     Phalcon\Mvc\View,
     Phalcon\Mvc\View\Engine\Volt,
     Laminas\Log\Logger,
-    Laminas\Log\Writer\Stream,
+    Laminas\Log\Writer\Stream as LogStream,
     MongoDB\Client as MongoDBClient,
     App\Providers,
     App\System;
@@ -42,9 +47,7 @@ $di->set('config', function () {
 }, true);
 
 
-$di->set('lang', function () {
-    return new System\Language();
-}, true);
+$di->set('lang', new System\Language(), true);
 
 
 $di->set('router', function () use ($di) {
@@ -57,10 +60,10 @@ $di->set('router', function () use ($di) {
 $di->set('logger', function () {
     // @docs https://docs.laminas.dev/laminas-log
     $logger = new Logger();
-    $writer = new Stream(DATA_DIR . 'logs/main.log');
+    $writer = new LogStream(DATA_DIR . 'logs/main.log');
     $logger->addWriter($writer);
 
-    $wErr = new Stream(DATA_DIR . 'logs/err.log');
+    $wErr = new LogStream(DATA_DIR . 'logs/err.log');
     $wErr->addFilter(new \Laminas\Log\Filter\Priority(Logger::ERR));
     $logger->addWriter($wErr);
 
@@ -79,22 +82,32 @@ $di->set('session', function () use ($di) {
     $lifetime = $di["config"]->path("session.lifetime");
     switch ($di["config"]->path("session.driver")) {
         case  "redis":
-            $session = new Phalcon\Session\Adapter\Redis([
-                "host"       => $di["config"]->path("database.redis.host"),
-                "port"       => $di["config"]->path("database.redis.port"),
+            $options           = [
+                'host'       => $di["config"]->path("database.redis.host"),
+                'port'       => $di["config"]->path("database.redis.port"),
+                'index'      => $di["config"]->path("database.redis.db"),
                 "persistent" => false,
                 "lifetime"   => $lifetime,
-                "index"      => $di["config"]->path("database.redis.db"),
-            ]);
+            ];
+            $session           = new Manager();
+            $serializerFactory = new SerializerFactory();
+            $factory           = new AdapterFactory($serializerFactory);
+            $redis             = new Redis($factory, $options);
+            $session->setAdapter($redis)->start();
         case  "file":
         default:
-            ini_set('session.save_path', $di["config"]->path('session.files'));
+            //ini_set('session.save_path', $di["config"]->path('session.files'));
             ini_set('session.gc_maxlifetime', $lifetime);
             ini_set("session.cookie_lifetime", $lifetime);
             ini_set('session.name', 'SID');
-            $session = new Phalcon\Session\Adapter\Files();
+            $session = new Manager();
+            $files   = new Stream(
+                [
+                    'savePath' => $di["config"]->path('session.files'),
+                ]
+            );
+            $session->setAdapter($files)->start();
     }
-    $session->start();
     return $session;
 }, true);
 
