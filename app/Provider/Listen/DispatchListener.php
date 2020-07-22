@@ -20,7 +20,7 @@
  * afterInitialize beforeForward
  */
 
-namespace App\Providers\Listeners;
+namespace App\Provider\Listen;
 
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;

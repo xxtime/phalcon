@@ -10,16 +10,17 @@
  * @link https://github.com/xxtime/phalcon
  */
 
-namespace App\Http\Exceptions;
+namespace App\Http\Controller;
 
-use Throwable;
+use Phalcon\Mvc\Controller as BaseController;
 
-class DefaultException extends \Exception
+class ExceptionController extends BaseController
 {
 
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function statusNotFoundAction()
     {
-        parent::__construct($message, $code, $previous);
+        $this->response->setStatusCode(404, 'Not Found');
+        $this->view->pick("default/statusNotFound");
     }
 
 }

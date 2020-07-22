@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers\Supports;
+namespace App\Provider\Support;
 
 /**
  * Class Adaptor

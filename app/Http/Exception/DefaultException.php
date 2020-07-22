@@ -10,11 +10,11 @@
  * @link https://github.com/xxtime/phalcon
  */
 
-namespace App\Http\Exceptions;
+namespace App\Http\Exception;
 
 use Throwable;
 
-class MiddlewareException extends \Exception
+class DefaultException extends \Exception
 {
 
     public function __construct($message = "", $code = 0, Throwable $previous = null)

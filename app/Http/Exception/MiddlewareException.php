@@ -10,16 +10,16 @@
  * @link https://github.com/xxtime/phalcon
  */
 
-namespace App\Http\Models;
+namespace App\Http\Exception;
 
-use Phalcon\Mvc\Model as BaseModel;
+use Throwable;
 
-/**
- * Class Model
- * @package App\Http\Models
- * @property \Phalcon\DI\FactoryDefault $di
- */
-class Model extends BaseModel
+class MiddlewareException extends \Exception
 {
+
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 
 }

@@ -10,17 +10,20 @@
  * @link https://github.com/xxtime/phalcon
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controller;
 
-use Phalcon\Mvc\Controller as BaseController;
+use Phalcon\Version;
 
-class ExceptionController extends BaseController
+class IndexController extends Controller
 {
 
-    public function statusNotFoundAction()
+    public function indexAction()
     {
-        $this->response->setStatusCode(404, 'Not Found');
-        $this->view->pick("default/statusNotFound");
+        $this->view->setVars([
+            "pha_version" => Version::get(),
+            "php_version" => phpversion(),
+        ]);
+        $this->view->pick("default/default");
     }
 
 }

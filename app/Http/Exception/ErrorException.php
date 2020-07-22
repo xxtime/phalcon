@@ -10,20 +10,16 @@
  * @link https://github.com/xxtime/phalcon
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Exception;
 
-use Phalcon\Version;
+use Throwable;
 
-class IndexController extends Controller
+class ErrorException extends \Exception
 {
 
-    public function indexAction()
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        $this->view->setVars([
-            "pha_version" => Version::get(),
-            "php_version" => phpversion(),
-        ]);
-        $this->view->pick("default/default");
+        parent::__construct($message, $code, $previous);
     }
 
 }

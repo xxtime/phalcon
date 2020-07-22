@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Providers\Supports;
+namespace App\Provider\Support;
 
 use Zend\Math\Rand;
 

@@ -104,10 +104,10 @@ return [
     |
     */
     'listeners' => [
-        'dispatch'    => 'App\Providers\Listeners\DispatchListener',
-        'application' => 'App\Providers\Listeners\ApplicationListener',
-        'router'      => 'App\Providers\Listeners\RouterListener',
-        'db'          => 'App\Providers\Listeners\DbListener',
+        'dispatch'    => 'App\Provider\Listen\DispatchListener',
+        'application' => 'App\Provider\Listen\ApplicationListener',
+        'router'      => 'App\Provider\Listen\RouterListener',
+        'db'          => 'App\Provider\Listen\DbListener',
     ],
 
     /*

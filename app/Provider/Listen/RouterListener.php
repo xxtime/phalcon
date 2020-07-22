@@ -14,7 +14,7 @@
  * public function beforeMount()
  */
 
-namespace App\Providers\Listeners;
+namespace App\Provider\Listen;
 
 use App\Http\Exceptions\MiddlewareException;
 use App\Http\Mapping;

@@ -141,7 +141,7 @@ $di->setShared(
 
 $di->set('view', function () use ($di) {
     $view = new View();
-    $view->setViewsDir(ASSETS_DIR . 'templates/');
+    $view->setViewsDir(ROOT_DIR . 'templates/');
     $view->registerEngines([
         '.phtml' => 'voltService',
     ]);
@@ -204,8 +204,8 @@ $di->set('mongodb', function () use ($di) {
 }, true);
 
 
-$di->set('supports', function () use ($di) {
-    return new Providers\Supports\Adaptor($di);
+$di->set('support', function () use ($di) {
+    return new Provider\Support\Adaptor($di);
 }, true);
 
 return $di;

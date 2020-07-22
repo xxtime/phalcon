@@ -10,14 +10,14 @@
  * @link https://github.com/xxtime/phalcon
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controller;
 
 use Phalcon\Mvc\Controller as BaseController;
 use Phalcon\Mvc\Dispatcher;
 
 /**
  * Class Controller
- * @package App\Http\Controllers
+ * @package App\Http\Controller
  * @property \Phalcon\Config $config
  * @property \Redis $cache
  * @property \Redis $redis

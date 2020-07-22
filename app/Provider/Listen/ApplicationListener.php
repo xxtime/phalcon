@@ -13,7 +13,7 @@
  * public function beforeSendResponse(Event $event, Application $app)
  */
 
-namespace App\Providers\Listeners;
+namespace App\Provider\Listen;
 
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Application;

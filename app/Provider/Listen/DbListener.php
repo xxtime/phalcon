@@ -7,7 +7,7 @@
  * public function boot(Event $event, $db)
  */
 
-namespace App\Providers\Listeners;
+namespace App\Provider\Listen;
 
 use App\Http\Exceptions\ErrorException;
 use Phalcon\Events\Event;
