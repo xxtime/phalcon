@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @name    \App\Http\Controllers\DemoController.php
+ * @name    \App\Http\Controller\DemoController.php
  * @package /ROOT/app/http/controller/DemoController.php
  */
-namespace App\Http\Controllers;
+namespace App\Http\Controller;
 
 
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Filter;
-use App\Http\Models\DemoModel;
+use App\Http\Model\DemoModel;
 use App\Providers\Components\Services;
 use App\Providers\Components\Queue;
 use Endroid\QrCode\QrCode;

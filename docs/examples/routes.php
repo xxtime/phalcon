@@ -28,7 +28,7 @@ $router->add('/(v[0-9]+)/:controller/:action/:params', ['module' => 1, 'controll
 $router->add('/(v[0-9]+)/:controller', ['module' => 1, 'controller' => 2]);
 
 $router->setDefaultModule('http');
-$router->setDefaultNamespace('App\Http\Controllers');
+$router->setDefaultNamespace('App\Http\Controller');
 $router->setDefaultController('index');
 $router->setDefaultAction('index');
 

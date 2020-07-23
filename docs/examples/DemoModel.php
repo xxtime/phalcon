@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @name    \App\Http\Models\DemoModel
- * @package /ROOT/app/Http/Models/DemoModel.php
+ * @name    \App\Http\Model\DemoModel
+ * @package /ROOT/app/Http/Model/DemoModel.php
  */
 
-namespace App\Http\Models;
+namespace App\Http\Model;
 
 
 use Phalcon\DI;

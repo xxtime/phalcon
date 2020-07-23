@@ -5,6 +5,7 @@ namespace App\Provider\Support;
 /**
  * Class Adaptor
  * @package App\Provider\Support
+ * @property \Phalcon\Di $di
  * @property \App\Provider\Support\HelpClass $help
  */
 class Adaptor

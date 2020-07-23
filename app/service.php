@@ -117,7 +117,7 @@ $di->set('session', function () use ($di) {
 
 $di->set('dispatcher', function () use ($di) {
     $dispatcher = new Dispatcher();
-    $dispatcher->setDefaultNamespace('App\Http\Controllers');
+    $dispatcher->setDefaultNamespace('App\Http\Controller');
     $dispatcher->setEventsManager($di['eventsManager']);
     return $dispatcher;
 }, true);
