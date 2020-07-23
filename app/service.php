@@ -85,7 +85,7 @@ $di->set('session', function () use ($di) {
             $options           = [
                 'host'       => $di["config"]->path("database.redis.host"),
                 'port'       => $di["config"]->path("database.redis.port"),
-                'index'      => $di["config"]->path("database.redis.db"),
+                'index'      => $di["config"]->path("database.redis.dbname"),
                 "persistent" => false,
                 "lifetime"   => $lifetime,
             ];
@@ -94,7 +94,10 @@ $di->set('session', function () use ($di) {
             $factory           = new AdapterFactory($serializerFactory);
             $redis             = new Redis($factory, $options);
             $session->setAdapter($redis)->start();
+            break;
+
         case  "file":
+
         default:
             //ini_set('session.save_path', $di["config"]->path('session.files'));
             ini_set('session.gc_maxlifetime', $lifetime);
@@ -152,7 +155,7 @@ $di->set('modelsCache', function () use ($di) {
         return new RedisCache($frontCache, [
             "host"   => $di["config"]->path("cache.host"),
             "port"   => $di["config"]->path("cache.port"),
-            'index'  => $di["config"]->path("cache.db"),
+            'index'  => $di["config"]->path("cache.dbname"),
             'prefix' => 'cache|',
         ]);
     }
@@ -161,7 +164,7 @@ $di->set('modelsCache', function () use ($di) {
 
 
 $di->set('cache', function () use ($di) {
-    $redis = new Redis();
+    $redis = new \Redis();
     $redis->connect($di["config"]->path("cache.host"), $di["config"]->path("cache.port"));
     $redis->select($di["config"]->path("cache.dbname"));
     return $redis;
@@ -183,7 +186,7 @@ $di->set('db', function () use ($di) {
 
 
 $di->set('redis', function () use ($di) {
-    $redis = new Redis();
+    $redis = new \Redis();
     $redis->connect($di["config"]->path("database.redis.host"), $di["config"]->path("database.redis.port"));
     $redis->select($di["config"]->path("database.redis.dbname"));
     return $redis;
@@ -201,8 +204,6 @@ $di->set('mongodb', function () use ($di) {
 }, true);
 
 
-$di->set('support', function () use ($di) {
-    return new Provider\Support\Adaptor($di);
-}, true);
+$di->set('support', new Provider\Support\Adaptor($di), true);
 
 return $di;
