@@ -4,8 +4,8 @@ namespace App\Provider\Support;
 
 /**
  * Class Adaptor
- * @package App\Providers\Supports
- * @property \App\Providers\Supports\HelpClass $help
+ * @package App\Provider\Support
+ * @property \App\Provider\Support\HelpClass $help
  */
 class Adaptor
 {
@@ -27,7 +27,7 @@ class Adaptor
         if (isset($this->register[$name])) {
             return $this->register[$name];
         }
-        $class                 = "\\App\\Providers\\Supports\\{$name}Class";
+        $class                 = "\\App\\Provider\\Support\\{$name}Class";
         $this->register[$name] = new $class($this);
         return $this->register[$name];
     }

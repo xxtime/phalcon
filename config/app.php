@@ -7,10 +7,10 @@ return [
     | App Name
     |--------------------------------------------------------------------------
     |
-    | Default is XT
+    | Default is zLab
     |
     */
-    'name'      => env('APP_NAME', 'Phalcon'),
+    'name'      => env('APP_NAME', 'zLab'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,19 +22,7 @@ return [
     | services your application utilizes. Set this in your ".env" file.
     |
     */
-    'env'       => env('APP_ENV', 'production'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Debug Mode
-    |--------------------------------------------------------------------------
-    |
-    | When your application is in debug mode, detailed error messages with
-    | stack traces will be shown on every error that occurs within your
-    | application. If disabled, a simple generic error page is shown.
-    |
-    */
-    'debug'     => env('APP_DEBUG', false),
+    'env'       => env('APP_ENV', 'prod'),
 
     /*
     |--------------------------------------------------------------------------

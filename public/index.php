@@ -22,6 +22,6 @@ define('DATA_DIR', ROOT_DIR . 'var' . DIRECTORY_SEPARATOR);
 
 define('ASSETS_DIR', DATA_DIR . 'assets' . DIRECTORY_SEPARATOR);
 
-$app = require_once APP_DIR . "Boot/kernel.php";
+$app = require_once APP_DIR . "kernel.php";
 
 $app->boot();

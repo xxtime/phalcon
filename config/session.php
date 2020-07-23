@@ -35,5 +35,5 @@ return [
     |
     */
 
-    'files' => DATA_DIR . 'sessions/',
+    'files' => DATA_DIR . 'session/',
 ];

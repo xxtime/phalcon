@@ -29,7 +29,7 @@ use Phalcon\DI\FactoryDefault,
     Laminas\Log\Logger,
     Laminas\Log\Writer\Stream as LogStream,
     MongoDB\Client as MongoDBClient,
-    App\Providers,
+    App\Provider,
     App\System;
 
 
@@ -60,10 +60,10 @@ $di->set('router', function () use ($di) {
 $di->set('logger', function () {
     // @docs https://docs.laminas.dev/laminas-log
     $logger = new Logger();
-    $writer = new LogStream(DATA_DIR . 'logs/main.log');
+    $writer = new LogStream(DATA_DIR . 'log/main.log');
     $logger->addWriter($writer);
 
-    $wErr = new LogStream(DATA_DIR . 'logs/err.log');
+    $wErr = new LogStream(DATA_DIR . 'log/err.log');
     $wErr->addFilter(new \Laminas\Log\Filter\Priority(Logger::ERR));
     $logger->addWriter($wErr);
 
@@ -120,23 +120,20 @@ $di->set('dispatcher', function () use ($di) {
 }, true);
 
 
-$di->setShared(
-    'voltService',
-    function (ViewBaseInterface $view) use ($di) {
-        $volt = new Volt($view, $di);
-        $volt->setOptions(
-            [
-                'always'    => true,
-                'extension' => '.php',
-                'separator' => '_',
-                'stat'      => true,
-                'path'      => DATA_DIR . 'cache/',
-                'prefix'    => 'cache',
-            ]
-        );
-        return $volt;
-    }
-);
+$di->set('voltService', function (ViewBaseInterface $view) use ($di) {
+    $volt = new Volt($view, $di);
+    $volt->setOptions(
+        [
+            'always'    => true,
+            'extension' => '.php',
+            'separator' => '_',
+            'stat'      => true,
+            'path'      => DATA_DIR . 'cache/',
+            'prefix'    => 'cache',
+        ]
+    );
+    return $volt;
+}, true);
 
 
 $di->set('view', function () use ($di) {
@@ -166,7 +163,7 @@ $di->set('modelsCache', function () use ($di) {
 $di->set('cache', function () use ($di) {
     $redis = new Redis();
     $redis->connect($di["config"]->path("cache.host"), $di["config"]->path("cache.port"));
-    $redis->select($di["config"]->path("cache.db"));
+    $redis->select($di["config"]->path("cache.dbname"));
     return $redis;
 }, true);
 
@@ -177,7 +174,7 @@ $di->set('db', function () use ($di) {
         'port'     => $di["config"]->path("database.mysql.port"),
         'username' => $di["config"]->path("database.mysql.user"),
         'password' => $di["config"]->path("database.mysql.pass"),
-        'dbname'   => $di["config"]->path("database.mysql.db"),
+        'dbname'   => $di["config"]->path("database.mysql.dbname"),
         'charset'  => $di["config"]->path("database.mysql.charset"),
     ]);
     $connection->setEventsManager($di['eventsManager']);
@@ -188,7 +185,7 @@ $di->set('db', function () use ($di) {
 $di->set('redis', function () use ($di) {
     $redis = new Redis();
     $redis->connect($di["config"]->path("database.redis.host"), $di["config"]->path("database.redis.port"));
-    $redis->select($di["config"]->path("database.redis.db"));
+    $redis->select($di["config"]->path("database.redis.dbname"));
     return $redis;
 }, true);
 
@@ -199,7 +196,7 @@ $di->set('mongodb', function () use ($di) {
         array_filter([
             'username'   => $di["config"]->path('database.mongodb.user'),
             'password'   => $di["config"]->path('database.mongodb.pass'),
-            'authSource' => $di["config"]->path('database.mongodb.db')
+            'authSource' => $di["config"]->path('database.mongodb.dbname')
         ]));
 }, true);
 

@@ -42,8 +42,8 @@ class Framework
         ))->register();
 
         require_once ROOT_DIR . 'vendor/autoload.php';
-        require_once APP_DIR . 'Boot/helpers.php';
-        $this->di = require_once APP_DIR . 'Boot/services.php';
+        require_once APP_DIR . 'helper.php';
+        $this->di = require_once APP_DIR . 'service.php';
 
         loadEnv();
     }
@@ -58,7 +58,7 @@ class Framework
         | Setting ENV
         |------------------------------------------------------------------
         */
-        switch ($this->di['config']->app->env != 'production') {
+        switch ($this->di['config']->app->env != 'prod') {
             case true:
                 $whoops = new \Whoops\Run;
                 $whoops->appendHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -68,22 +68,6 @@ class Framework
             default:
                 error_reporting(0);
         };
-
-        /*
-        | Setting Debug Logs
-        |------------------------------------------------------------------
-        */
-        if ($this->di['config']->app->debug) {
-            $logs = $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'] . ' ' . $_SERVER['SERVER_PROTOCOL'] . "\n";
-            foreach (getAllHeaders() as $key => $value) {
-                $logs .= $key . ': ' . $value . "\n";
-            }
-            if ($body = file_get_contents("php://input")) {
-                $logs .= "\n" . $body . "\n";
-            }
-            $logs .= "_____________________________________";
-            $this->di->get('logger')->debug($logs);
-        }
 
         /*
         | Setting Listeners
