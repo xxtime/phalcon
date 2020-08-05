@@ -4,6 +4,19 @@
 * https://docs.servicestack.net/grpc-php
 * https://github.com/grpc/grpc/tree/master/src/php#build-and-install-the-grpc-c-core-library
 
+
+## bash
+```bash
+protoc --proto_path=src \
+  --go_opt=paths=source_relative \
+  --go_out=plugins=grpc:build/gen \
+  --php_out=build/gen \
+  --grpc_out=build/gen \
+  --plugin=protoc-gen-grpc=/usr/local/bin/grpc_php_plugin \
+  ./src/workspace.proto
+```
+
+
 ## composer
 ```json
 {
@@ -14,7 +27,8 @@
   },
   "autoload": {
     "psr-4": {
-      "GPBMetadata\\": ["grpc/GPBMetadata/"]
+      "GPBMetadata\\": ["grpc/GPBMetadata/"],
+      "Workspace\\": ["grpc/Workspace/"]
     }
   }
 }
