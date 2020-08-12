@@ -5,7 +5,7 @@ namespace App\Provider\Support;
 
 use Zend\Math\Rand;
 
-class HelpClass
+class HelpClass extends AbstractClass
 {
     /**
      * 生成随机字符串
