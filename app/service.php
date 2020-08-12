@@ -206,4 +206,7 @@ $di->set('mongodb', function () use ($di) {
 
 $di->set('support', new Provider\Support\Adaptor($di), true);
 
+
+$di->set('service', new Provider\Service\Adaptor($di), true);
+
 return $di;

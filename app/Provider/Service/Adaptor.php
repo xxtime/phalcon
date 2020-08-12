@@ -1,23 +1,20 @@
 <?php
 
-namespace App\Provider\Support;
+namespace App\Provider\Service;
 
 use Phalcon\Di;
 
 /**
  * Class Adaptor
- * @package App\Provider\Support
+ * @package App\Provider\Service
  * @property Di $di
- * @property HelpClass $help
  */
 class Adaptor
 {
 
     private $register;
 
-    private $processId;
-
-    public $di;
+    protected $di;
 
     public function __construct($di)
     {
@@ -30,17 +27,9 @@ class Adaptor
         if (isset($this->register[$name])) {
             return $this->register[$name];
         }
-        $class                 = "\\App\\Provider\\Support\\{$name}Class";
+        $class                 = "\\App\\Provider\\Service\\{$name}Class";
         $this->register[$name] = new $class($this->di);
         return $this->register[$name];
-    }
-
-    public function getProcessId()
-    {
-        if ($this->processId != null) {
-            return $this->processId;
-        }
-        return $this->processId = $this->help->randString(32);
     }
 
 }
