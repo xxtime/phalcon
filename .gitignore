@@ -16,6 +16,7 @@ Thumbs.db
 
 # project
 .env
+.env.local
 composer.lock
 public/
 var/
