@@ -67,7 +67,7 @@ class Framework
                 break;
             default:
                 $handler = new ErrorHandler();
-                $handler->setTemplate("exception/defaultHandler.html");
+                $handler->setTemplate("html/defaultHandler.html");
                 $handler->register();
         };
 
