@@ -10,6 +10,7 @@
  * @link https://github.com/xxtime/phalcon
  */
 
+use App\System\ErrorHandler;
 use Phalcon\Loader;
 use Phalcon\Mvc\Application;
 
@@ -63,10 +64,11 @@ class Framework
                 $whoops = new \Whoops\Run;
                 $whoops->appendHandler(new \Whoops\Handler\PrettyPageHandler);
                 $whoops->register();
-                error_reporting(E_ALL);
                 break;
             default:
-                error_reporting(0);
+                $handler = new ErrorHandler();
+                $handler->setTemplate("exception/defaultHandler.html");
+                $handler->register();
         };
 
         /*
