@@ -4,6 +4,7 @@
  * @name    \App\Http\Controller\DemoController.php
  * @package /ROOT/app/http/controller/DemoController.php
  */
+
 namespace App\Http\Controller;
 
 
@@ -99,7 +100,7 @@ class DemoController extends Controller
     {
         // 方法一
         $this->demoModel->name = "Joe";
-        $this->demoModel->age = "28";
+        $this->demoModel->age  = "28";
         $this->demoModel->create();
         return $this->demoModel->id;
     }
@@ -110,7 +111,7 @@ class DemoController extends Controller
     {
         // 方法一
         $this->demoModel->name = "Joe";
-        $this->demoModel->age = "28";
+        $this->demoModel->age  = "28";
         $this->demoModel->save();
         return $this->demoModel->id;
 
@@ -137,6 +138,14 @@ class DemoController extends Controller
                 'type'
             )
         );
+    }
+
+
+    // 执行原生 sql
+    public function executeSql()
+    {
+        $sql = "UPDATE users SET name= ?";
+        $this->db->execute($sql, ["Alina"]);
     }
 
 
@@ -192,10 +201,10 @@ class DemoController extends Controller
     public function qrAction()
     {
         // 生成二维码
-        $username = urlencode('账号：') . 'joe@xxtime.com';
+        $username  = urlencode('账号：') . 'joe@xxtime.com';
         $secretKey = 'DPI45HCE';
-        $url = "otpauth://totp/{$username}?secret={$secretKey}&issuer=" . urlencode('XXTIME.COM');
-        $qrCode = new QrCode();
+        $url       = "otpauth://totp/{$username}?secret={$secretKey}&issuer=" . urlencode('XXTIME.COM');
+        $qrCode    = new QrCode();
         $qrCode
             ->setText($url)
             ->setSize(200)
@@ -212,9 +221,9 @@ class DemoController extends Controller
 
 
         // 验证
-        $totp = new PHPGangsta_GoogleAuthenticator();
-        $secretKey = $totp->createSecret(32);
-        $oneCode = $totp->getCode($secretKey);
+        $totp        = new PHPGangsta_GoogleAuthenticator();
+        $secretKey   = $totp->createSecret(32);
+        $oneCode     = $totp->getCode($secretKey);
         $checkResult = $totp->verifyCode($secretKey, $oneCode, 2);    // 2 = 2*30sec clock tolerance
         if ($checkResult) {
             echo 'OK';
