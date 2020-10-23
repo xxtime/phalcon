@@ -5,6 +5,9 @@
     "laminas/laminas-loader": "~2.6",
     "laminas/laminas-math": "~3.2",
     "laminas/laminas-escaper": "~2.6",
-    "laminas/laminas-log": "~2.12"
+    "laminas/laminas-log": "~2.12",
+    "laminas/laminas-crypt": "~3.3",
+    "laminas/laminas-validator": "~2.12",
+    "laminas/laminas-filter": "~2.9"
   }
 }
