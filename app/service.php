@@ -59,21 +59,25 @@ $di->set('router', function () use ($di) {
 
 $di->set('logger', function () {
     // @docs https://docs.laminas.dev/laminas-log
-    $logger = new Logger();
-
     $wDef = new LogStream(DATA_DIR . 'log/main.log');
-    $logger->addWriter($wDef);
 
     $wErr = new LogStream(DATA_DIR . 'log/error.log');
     $wErr->addFilter(new \Laminas\Log\Filter\Priority(Logger::ERR));
-    $logger->addWriter($wErr);
+
+    $wWar = new LogStream(DATA_DIR . 'log/warn.log');
+    $wWar->addFilter(new \Laminas\Log\Filter\Priority(Logger::WARN, "="));
 
     $wInf = new LogStream(DATA_DIR . 'log/info.log');
     $wInf->addFilter(new \Laminas\Log\Filter\Priority(Logger::INFO, "="));
-    $logger->addWriter($wInf);
 
     $wDeb = new LogStream(DATA_DIR . 'log/debug.log');
     $wDeb->addFilter(new \Laminas\Log\Filter\Priority(Logger::DEBUG, "="));
+
+    $logger = new Logger();
+    $logger->addWriter($wDef);
+    $logger->addWriter($wErr);
+    $logger->addWriter($wWar);
+    $logger->addWriter($wInf);
     $logger->addWriter($wDeb);
 
     return $logger;

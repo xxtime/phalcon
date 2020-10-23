@@ -25,7 +25,7 @@ class DbListener extends \Phalcon\Di\Injectable
             throw new ErrorException("Disable SQL Statement");
         }
         if ($di['config']->path("app.env") == 'dev') {
-            $di->get('logger')->debug($pdo->getSQLStatement());
+            $di->get('logger')->warn($pdo->getSQLStatement());
         }
     }
 
