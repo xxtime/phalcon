@@ -3,7 +3,7 @@
 
 namespace App\Provider\Support;
 
-use Zend\Math\Rand;
+use Laminas\Math\Rand;
 
 class HelpClass extends AbstractClass
 {

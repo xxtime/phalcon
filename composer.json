@@ -5,6 +5,7 @@
     "filp/whoops": "~2.7",
     "symfony/var-dumper": "~3.4|~4.4|~5.0",
     "laminas/laminas-loader": "~2.6",
+    "laminas/laminas-math": "^3.7",
     "laminas/laminas-math": "~3.2",
     "laminas/laminas-escaper": "~2.6",
     "laminas/laminas-log": "~2.12",
