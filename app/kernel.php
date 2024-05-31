@@ -11,7 +11,7 @@
  */
 
 use App\System\ErrorHandler;
-use Phalcon\Loader;
+use Phalcon\Autoload\Loader;
 use Phalcon\Mvc\Application;
 
 /**
@@ -38,7 +38,7 @@ class Framework
     public function loader()
     {
         $loader = new Loader();
-        $loader->registerNamespaces(array(
+        $loader->setNamespaces(array(
             'App' => APP_DIR,
         ))->register();
 

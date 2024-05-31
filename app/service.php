@@ -12,7 +12,7 @@
 
 use Phalcon\DI\FactoryDefault,
     Phalcon\Crypt,
-    Phalcon\Config,
+    Phalcon\Config\Config,
     Phalcon\Db\Adapter\Pdo\Mysql,
     Phalcon\Cache\Frontend\Data as FrontData,
     Phalcon\Cache\Backend\File as FileCache,
