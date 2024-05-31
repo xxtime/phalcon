@@ -1,5 +1,7 @@
 {
   "require": {
+    "php": "^8.1",
+    "ext-phalcon": "^5.7",
     "filp/whoops": "~2.7",
     "symfony/var-dumper": "~3.4|~4.4|~5.0",
     "laminas/laminas-loader": "~2.6",
